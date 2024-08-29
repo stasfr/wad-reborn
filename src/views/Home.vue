@@ -1,7 +1,5 @@
 <template>
-  <div>app</div>
+  <div>home page</div>
 </template>
 
 <script setup></script>
-
-<style scoped></style>
