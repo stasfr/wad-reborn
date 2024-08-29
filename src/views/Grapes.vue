@@ -1,5 +1,5 @@
 <template>
-  <div class="_container">home page</div>
+  <div class="_container">grapes page</div>
 </template>
 
 <script setup></script>
