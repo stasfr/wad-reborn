@@ -1,7 +1,17 @@
 import { supabase } from "@/services/supabase";
 
-async function getGrapes() {
-  return await supabase.from("Grapes").select("*");
+async function getAllGrapesCount() {
+  const { count, error } = await supabase
+    .from("Grapes")
+    .select("*", { count: "exact" });
+  return { count, error };
+}
+
+async function getGrapes(offset = 0) {
+  return await supabase
+    .from("Grapes")
+    .select("*")
+    .range(offset, offset + 20);
 }
 
 async function getGrape(id) {
@@ -11,4 +21,5 @@ async function getGrape(id) {
 export default {
   getGrapes,
   getGrape,
+  getAllGrapesCount,
 };
