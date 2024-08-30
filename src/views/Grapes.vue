@@ -2,7 +2,12 @@
   <div class="page__grapes grapes">
     <div class="grapes__container _container">
       <div class="grapes__body">
+        <GrapeCardLoadingComponent
+          v-if="grapesStore.loading"
+          v-for="item in 15"
+        />
         <GrapeCardComponent
+          v-else
           v-for="grape in grapesStore.grapes"
           :grape="grape"
         />
@@ -15,10 +20,13 @@
 import { useGrapeStore } from "@/stores/grapes";
 import { onMounted } from "vue";
 import GrapeCardComponent from "@/components/Grapes/GrapeCardComponent.vue";
+import GrapeCardLoadingComponent from "@/components/Grapes/GrapeCardLoadingComponent.vue";
 
 const grapesStore = useGrapeStore();
 onMounted(async () => {
-  await grapesStore.getGrapes();
+  if (grapesStore.grapes.length === 0) {
+    await grapesStore.getGrapes();
+  }
 });
 </script>
 
