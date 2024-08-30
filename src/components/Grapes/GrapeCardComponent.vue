@@ -12,8 +12,8 @@
     </div>
     <div class="grape-card__taste-profile taste-profile">
       <GrapeCardLineComponent
-        v-for="tasteProfile in grape.taste_profile"
-        :tasteProfileData="tasteProfile"
+        v-for="(value, key) in grape.taste_profile"
+        :tasteProfileData="{ value, key }"
         :hoverEffect="hoverEffect"
       />
     </div>
