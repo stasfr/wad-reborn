@@ -14,7 +14,17 @@ async function signInWithPassword({ email, password }) {
   });
 }
 
+async function getSession() {
+  return await supabase.auth.getSession();
+}
+
+async function signOut() {
+  return await supabase.auth.signOut();
+}
+
 export default {
   signUp,
   signInWithPassword,
+  getSession,
+  signOut,
 };

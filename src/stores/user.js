@@ -35,5 +35,33 @@ export const useUserStore = defineStore("userStore", () => {
     }
   }
 
-  return { user, signUp, signInWithPassword };
+  async function getSession() {
+    try {
+      const data = await API.User.getSession();
+
+      if (data.error)
+        throw Error(
+          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
+        );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function signOut() {
+    try {
+      const data = await API.User.signOut();
+
+      if (data.error)
+        throw Error(
+          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
+        );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return { user, signUp, signInWithPassword, getSession, signOut };
 });

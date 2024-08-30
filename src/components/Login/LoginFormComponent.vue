@@ -1,5 +1,5 @@
 <template>
-  <form action="" class="login__form">
+  <form action="" class="login__form" @submit.prevent="">
     <input
       type="email"
       class="login__input"
@@ -12,10 +12,12 @@
       placeholder="password"
       v-model="password"
     />
-    <button class="login__btn">Проверить пользователя</button>
-    <button class="login__btn">Войти</button>
-    <button class="login__btn">Регистрация</button>
-    <button class="login__btn">Выйти</button>
+    <button class="login__btn" @click="getSession">
+      Проверить пользователя
+    </button>
+    <button class="login__btn" @click="signInWithPassword">Войти</button>
+    <button class="login__btn" @click="signUp">Регистрация</button>
+    <button class="login__btn" @click="signOut">Выйти</button>
   </form>
 </template>
 
@@ -28,15 +30,26 @@ const password = ref("password");
 
 const userStore = useUserStore();
 
-async function handleSubmit() {
+async function signUp() {
+  await userStore.signUp({
+    email: email.value,
+    password: password.value,
+  });
+}
+
+async function signInWithPassword() {
   await userStore.signInWithPassword({
     email: email.value,
     password: password.value,
   });
-  // await userStore.signUp({
-  //   email: email.value,
-  //   password: password.value,
-  // });
+}
+
+async function getSession() {
+  const localUser = await userStore.getSession();
+}
+
+async function signOut() {
+  const signOut = await userStore.signOut();
 }
 </script>
 
