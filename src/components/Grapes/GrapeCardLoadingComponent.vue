@@ -1,9 +1,11 @@
 <template>
-  <div class="grape-card__loading">
-    <div class="grape-card__loading-text"></div>
-    <div class="grape-card__loading-sub-text"></div>
-    <div class="grape-card__loading-lines"></div>
-    <div class="grape-card__loading-btn"></div>
+  <div v-for="item in 15">
+    <div class="grape-card__loading">
+      <div class="grape-card__loading-text"></div>
+      <div class="grape-card__loading-sub-text"></div>
+      <div class="grape-card__loading-lines"></div>
+      <div class="grape-card__loading-btn"></div>
+    </div>
   </div>
 </template>
 

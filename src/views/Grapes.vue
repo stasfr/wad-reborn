@@ -2,10 +2,7 @@
   <div class="page__grapes grapes">
     <div class="grapes__container _container">
       <div class="grapes__body">
-        <GrapeCardLoadingComponent
-          v-if="grapesStore.loading"
-          v-for="item in 15"
-        />
+        <GrapeCardLoadingComponent v-if="grapesStore.loading" />
         <GrapeCardComponent
           v-else
           v-for="grape in grapesStore.grapes"
