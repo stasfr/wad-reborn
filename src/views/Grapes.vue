@@ -10,34 +10,57 @@
           :grape="grape"
         />
       </div>
-      <button
-        class="grapes__load-btn"
-        @click="pushNewGrapes"
-        v-if="!grapesStore.isAllGrapesLoaded"
-      >
-        Загрузить
-      </button>
+      <!-- Скрытый элемент для infinite scroll -->
+      <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useGrapeStore } from "@/stores/grapes";
-import { onMounted } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import GrapeCardComponent from "@/components/Grapes/GrapeCardComponent.vue";
 import GrapeCardLoadingComponent from "@/components/Grapes/GrapeCardLoadingComponent.vue";
 import GrapeSearch from "@/components/Grapes/GrapeSearch.vue";
 
 const grapesStore = useGrapeStore();
+const observer = ref(null); // Ссылка на элемент для наблюдения
+const observerInstance = ref(null); // Ссылка на экземпляр IntersectionObserver
+
 onMounted(async () => {
   if (grapesStore.grapes.length === 0) {
     await grapesStore.getGrapes();
     await grapesStore.getAllGrapesCount();
   }
+
+  // Инициализация IntersectionObserver
+  observerInstance.value = new IntersectionObserver(handleIntersect, {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  });
+
+  if (observer.value) {
+    observerInstance.value.observe(observer.value);
+  }
 });
 
-async function pushNewGrapes() {
-  await grapesStore.getGrapes();
+onBeforeUnmount(() => {
+  // Отмена наблюдения при уничтожении компонента
+  if (observerInstance.value && observer.value) {
+    observerInstance.value.unobserve(observer.value);
+  }
+});
+
+function handleIntersect(entries) {
+  const entry = entries[0];
+  if (
+    entry.isIntersecting &&
+    !grapesStore.loading &&
+    !grapesStore.isAllGrapesLoaded
+  ) {
+    grapesStore.getGrapes();
+  }
 }
 </script>
 
