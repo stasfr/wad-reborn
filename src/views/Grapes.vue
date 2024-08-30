@@ -51,7 +51,8 @@ async function pushNewGrapes() {
   display: grid;
   grid-template-columns: repeat(3, auto);
   gap: 40px;
-  justify-items: center;
+  justify-content: space-around;
+  align-items: center;
 }
 @media (max-width: 1090px) {
   .grapes__body {
