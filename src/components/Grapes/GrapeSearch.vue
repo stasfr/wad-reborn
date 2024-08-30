@@ -1,10 +1,14 @@
 <template>
-  <input
-    class="grapes__search"
-    type="text"
-    placeholder="Поиск"
-    v-model="search"
-  />
+  <div class="grapes__search search">
+    <div class="search__nav">
+      <input
+        class="search__input"
+        type="text"
+        placeholder="Поиск"
+        v-model="search"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -17,16 +21,22 @@ const grapesStore = useGrapeStore();
 </script>
 
 <style scoped>
-.grapes__search {
+.search {
+  margin-bottom: 20px;
+}
+.search__nav {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.search__input {
   font-size: large;
-  margin: 0 auto 20px;
   text-align: center;
   border-bottom: 1px solid #500a1f;
-  padding-bottom: 5px;
+  padding: 5px 0;
   width: 100%;
 }
-
-.grapes__search:focus {
+.search__input:focus {
   outline: none;
 }
 </style>
