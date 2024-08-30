@@ -13,6 +13,9 @@
           <li class="menu__item">
             <RouterLink to="/dices" class="menu__link">Кубы</RouterLink>
           </li>
+          <li class="menu__item">
+            <RouterLink to="/login" class="menu__link">Войти</RouterLink>
+          </li>
         </ul>
       </nav>
     </div>

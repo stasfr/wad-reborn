@@ -4,6 +4,7 @@ import Dices from "@/views/Dices.vue";
 import Grapes from "@/views/Grapes.vue";
 import GrapePage from "@/views/GrapePage.vue";
 import NotFound from "@/views/NotFound.vue";
+import Login from "@/views/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,12 @@ const router = createRouter({
       name: "dices",
       component: Dices,
       meta: { title: "Dices" },
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+      meta: { title: "Login" },
     },
     {
       path: "/:CatchAll(.*)",
