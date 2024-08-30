@@ -5,6 +5,7 @@ import Grapes from "@/views/Grapes.vue";
 import GrapePage from "@/views/GrapePage.vue";
 import NotFound from "@/views/NotFound.vue";
 import Login from "@/views/Login.vue";
+import UserProfile from "@/views/UserProfile.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,12 @@ const router = createRouter({
       name: "Login",
       component: Login,
       meta: { title: "Login" },
+    },
+    {
+      path: "/profile",
+      name: "userProfile",
+      component: UserProfile,
+      meta: { title: "Profile" },
     },
     {
       path: "/:CatchAll(.*)",

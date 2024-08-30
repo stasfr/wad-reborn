@@ -38,6 +38,9 @@ export const useUserStore = defineStore("userStore", () => {
   async function getSession() {
     try {
       const data = await API.User.getSession();
+      if (data.data.session) {
+        user.value = data.data.session.user;
+      }
 
       if (data.error)
         throw Error(

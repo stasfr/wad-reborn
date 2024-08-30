@@ -14,7 +14,10 @@
             <RouterLink to="/dices" class="menu__link">Кубы</RouterLink>
           </li>
           <li class="menu__item">
-            <RouterLink to="/login" class="menu__link">Войти</RouterLink>
+            <RouterLink to="/profile" class="menu__link" v-if="userStore.user"
+              >Аккаунт</RouterLink
+            >
+            <RouterLink to="/login" class="menu__link" v-else>Войти</RouterLink>
           </li>
         </ul>
       </nav>
@@ -22,7 +25,16 @@
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from "vue";
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore();
+
+onMounted(async () => {
+  await userStore.getSession();
+});
+</script>
 
 <style scoped>
 .header {
