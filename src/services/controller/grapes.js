@@ -14,12 +14,17 @@ async function getGrapes(offset = 0) {
     .range(offset, offset + 20);
 }
 
-async function getGrape(id) {
+async function getGrapeById(id) {
   return await supabase.from("Grapes").select("*").eq("id", id);
+}
+
+async function getGrapesByName(name) {
+  return await supabase.from("Grapes").select("*").in("name", [name]);
 }
 
 export default {
   getGrapes,
-  getGrape,
+  getGrapeById,
   getAllGrapesCount,
+  getGrapesByName,
 };

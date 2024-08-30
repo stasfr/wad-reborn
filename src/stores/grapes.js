@@ -56,7 +56,24 @@ export const useGrapeStore = defineStore("grapesStore", () => {
   async function getSingleGrape(id) {
     try {
       loading.value = true;
-      const data = await API.Grapes.getGrape(id);
+      const data = await API.Grapes.getGrapeById(id);
+      if (data.error)
+        throw Error(
+          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
+        );
+      grape.value = data.data;
+      loading.value = false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getGrapesByName(name) {
+    try {
+      loading.value = true;
+      const data = await API.Grapes.getGrapesByName(name);
+      console.log(data);
+
       if (data.error)
         throw Error(
           `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
@@ -77,5 +94,6 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     getGrapes,
     getSingleGrape,
     getAllGrapesCount,
+    getGrapesByName,
   };
 });
