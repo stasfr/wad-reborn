@@ -1,4 +1,5 @@
 import { useUserStore } from "@/stores/user";
+import { useGrapeStore } from "@/stores/grapes";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Dices from "@/views/Dices.vue";
@@ -71,6 +72,11 @@ router.beforeEach((to, from, next) => {
     getUser(next);
   } else {
     next();
+  }
+
+  if (from.fullPath === `/grapes/${from.params.grapeId}`) {
+    const grapesStore = useGrapeStore();
+    grapesStore.grape = {};
   }
 });
 
