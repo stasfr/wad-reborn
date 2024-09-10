@@ -12,10 +12,7 @@ export const useGrapeStore = defineStore("grapesStore", () => {
   async function getAllGrapesCount() {
     try {
       const data = await API.Grapes.getAllGrapesCount();
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
 
       allCount.value = data.count;
     } catch (error) {
@@ -36,10 +33,7 @@ export const useGrapeStore = defineStore("grapesStore", () => {
       const data = await API.Grapes.getGrapes(offset);
 
       //TODO: отлавливаться пустой респонс (объекта нет в бд) (мб на основе data.status)
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
 
       grapes.value.push(...data.data);
 
@@ -57,10 +51,8 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     try {
       loading.value = true;
       const data = await API.Grapes.getGrapeById(id);
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
+
       grape.value = data.data;
       loading.value = false;
     } catch (error) {
@@ -74,10 +66,8 @@ export const useGrapeStore = defineStore("grapesStore", () => {
       const data = await API.Grapes.getGrapesByName(name);
       console.log(data);
 
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
+
       grape.value = data.data;
       loading.value = false;
     } catch (error) {

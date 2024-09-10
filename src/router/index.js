@@ -37,6 +37,7 @@ const router = createRouter({
       meta: { title: "Dices", requiresAuth: false },
     },
     {
+      //TODO: добавить редирект на /profile, после входа в акк
       path: "/login",
       name: "Login",
       component: Login,

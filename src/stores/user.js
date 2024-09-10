@@ -8,11 +8,7 @@ export const useUserStore = defineStore("userStore", () => {
   async function signUp({ email, password }) {
     try {
       const data = await API.User.signUp({ email, password });
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
-      user.value = data.data;
+      if (data.error) throw Error(data.error);
     } catch (error) {
       console.log(error);
     }
@@ -21,10 +17,7 @@ export const useUserStore = defineStore("userStore", () => {
   async function signInWithPassword({ email, password }) {
     try {
       const data = await API.User.signInWithPassword({ email, password });
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
       user.value = data.data;
     } catch (error) {
       console.log(error);
@@ -38,10 +31,7 @@ export const useUserStore = defineStore("userStore", () => {
         user.value = data.data.session.user;
       }
 
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
       return data;
     } catch (error) {
       console.log(error);
@@ -51,11 +41,9 @@ export const useUserStore = defineStore("userStore", () => {
   async function signOut() {
     try {
       const data = await API.User.signOut();
+      user.value = {};
 
-      if (data.error)
-        throw Error(
-          `\nCode: ${data.error?.code}\nMessage: ${data.error?.message}\nDetails: ${data.error?.details}\nHint: ${data.error?.hint}`
-        );
+      if (data.error) throw Error(data.error);
       return data;
     } catch (error) {
       console.log(error);

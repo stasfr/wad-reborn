@@ -11,6 +11,7 @@
         />
       </div>
       <!-- Скрытый элемент для infinite scroll -->
+      <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
       <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
     </div>
   </div>
