@@ -17,25 +17,8 @@
         :hoverEffect="hoverEffect"
       />
     </div>
-    <!-- <div class="grape-card__flavors flavors">
-      <div class="flavors__flavor" v-for="flavor in grape.Flavors">
-        {{ flavor }}
-      </div>
-    </div>
-    <div class="grape-card__handlings handlings">
-      <div class="handlings__serve">
-        Температура подачи: <br />{{ grape.Handling.serve }}
-      </div>
-      <div class="handlings__glass-type">
-        Бокал: {{ grape.Handling.glass_type }}
-      </div>
-      <div class="handlings__decant">
-        Время декантации: {{ grape.Handling.decant }}
-      </div>
-      <div class="handlings__cellar">
-        Потенциал хранения: {{ grape.Handling.cellar }}
-      </div>
-    </div> -->
+    <!-- TODO: вместо кнопок со словами - сделать кнопки с иконками:
+    добавить в конструктор, добавить в избранное, подробнее -->
     <div class="grape-card__btn" :class="{ isHover: hoverEffect }">
       <RouterLink
         :to="{
