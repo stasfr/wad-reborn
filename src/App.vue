@@ -1,15 +1,25 @@
 <template>
-  <div class="wrapper">
-    <HeaderComponent />
-    <main class="page">
-      <RouterView />
-    </main>
-  </div>
+  <component :is="layout">
+    <RouterView />
+  </component>
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-import HeaderComponent from "./components/HeaderComponent.vue";
+import { useRoute } from "vue-router";
+import MainLayout from "./layouts/MainLayout.vue";
+import { computed } from "vue";
+
+const route = useRoute();
+
+const layouts = {
+  MainLayout,
+};
+
+const layout = computed(() => {
+  const layoutKey = route.meta.layout;
+
+  return layouts[layoutKey || "MainLayout"];
+});
 </script>
 
 <style scoped></style>
