@@ -1,86 +1,30 @@
 <template>
-  <header class="header">
-    <div class="header__container _container">
-      <RouterLink to="/" class="header__logo"> WineAndDices </RouterLink>
-      <nav class="header__menu menu">
-        <ul class="menu__list">
-          <li class="menu__item">
-            <RouterLink to="/" class="menu__link">Главная</RouterLink>
-          </li>
-          <li class="menu__item">
-            <RouterLink to="/grapes" class="menu__link">Виноград</RouterLink>
-          </li>
-          <li class="menu__item">
-            <RouterLink to="/dices" class="menu__link">Кубы</RouterLink>
-          </li>
-          <li class="menu__item">
-            <RouterLink to="/profile" class="menu__link">Аккаунт</RouterLink>
-          </li>
-          <li class="menu__item">
-            <input type="checkbox" @click="changeTheme()" />{{
-              themeStore.theme
-            }}
-          </li>
+  <header class="absolute w-full left-0 top-0 z-50">
+    <div
+      class="flex min-h-16 items-center justify-between box-content max-w-screen-xl mx-auto px-4"
+    >
+      <RouterLink to="/"> WineAndDices </RouterLink>
+      <div class="dropdown dropdown-hover dropdown-end">
+        <div tabindex="0" role="button" class="avatar rounded-full placeholder">
+          <div class="bg-neutral text-neutral-content w-12 rounded-full">
+            <span>U</span>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu z-50 rounded bg-white">
+          <li><RouterLink to="/profile">Аккаунт</RouterLink></li>
+          <li><RouterLink to="/">Главная</RouterLink></li>
+          <li><RouterLink to="/grapes">Виноград</RouterLink></li>
+          <li><RouterLink to="/dices">Кубы</RouterLink></li>
         </ul>
-      </nav>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup>
+import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
-import { useThemeStore } from "@/stores/theme";
 
-const themeStore = useThemeStore();
-const changeTheme = themeStore.changeTheme;
-const mobileMenu = ref(false);
-const checkbox = ref(false);
+const userStore = useUserStore();
+const user = ref();
 </script>
-
-<style scoped>
-.header {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 50;
-}
-.header__container {
-  display: flex;
-  min-height: 100px;
-  align-items: center;
-  justify-content: space-between;
-}
-.header__logo {
-  font-weight: 700;
-  color: inherit;
-}
-.menu__list {
-  display: flex;
-  flex-wrap: wrap;
-}
-.menu__item:not(:last-child) {
-  margin-right: 20px;
-}
-.menu__link {
-  color: inherit;
-  transition: all 0.35s ease;
-  position: relative;
-}
-.menu__link::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: black;
-  transform: scale(0);
-  transition: all 0.3s ease-in-out 0s;
-  visibility: hidden;
-}
-.menu__link:hover::before {
-  visibility: visible;
-  transform: scale(1);
-}
-</style>
