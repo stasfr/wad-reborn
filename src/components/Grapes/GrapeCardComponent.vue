@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 bg-secondary card box-content p-4 w-64">
+  <div class="space-y-4 bg-primary card box-content p-4 w-64">
     <div class="card-title">{{ grape.name }}</div>
     <div class="text-xs">
       <span v-for="name in grape.alt_names"> {{ name }}; </span>
