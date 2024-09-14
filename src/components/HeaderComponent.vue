@@ -14,10 +14,12 @@
             <RouterLink to="/dices" class="menu__link">Кубы</RouterLink>
           </li>
           <li class="menu__item">
-            <RouterLink to="/profile" class="menu__link" v-if="userStore.user"
-              >Аккаунт</RouterLink
-            >
-            <RouterLink to="/login" class="menu__link" v-else>Войти</RouterLink>
+            <RouterLink to="/profile" class="menu__link">Аккаунт</RouterLink>
+          </li>
+          <li class="menu__item">
+            <input type="checkbox" @click="changeTheme()" />{{
+              themeStore.theme
+            }}
           </li>
         </ul>
       </nav>
@@ -26,14 +28,13 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { useUserStore } from "@/stores/user";
+import { ref } from "vue";
+import { useThemeStore } from "@/stores/theme";
 
-const userStore = useUserStore();
-
-onMounted(async () => {
-  await userStore.getSession();
-});
+const themeStore = useThemeStore();
+const changeTheme = themeStore.changeTheme;
+const mobileMenu = ref(false);
+const checkbox = ref(false);
 </script>
 
 <style scoped>
