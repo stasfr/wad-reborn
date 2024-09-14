@@ -5,10 +5,14 @@
       <span v-for="name in grape.alt_names"> {{ name }}; </span>
     </div>
     <div class="flex flex-col">
-      <div v-for="(value, key) in grape.taste_profile">
-        <span>{{ titles[key] }}</span>
+      <div
+        v-for="(value, key) in grape.taste_profile"
+        :data-tip="titles[key]"
+        class="flex items-center gap-2"
+      >
+        <p class="flex-[45%]">{{ titles[key] }}</p>
         <progress
-          class="progress w-full"
+          class="progress flex-[55%]"
           :value="value * 10"
           max="100"
         ></progress>
