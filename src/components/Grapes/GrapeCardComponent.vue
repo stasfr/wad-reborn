@@ -18,24 +18,51 @@
         ></progress>
       </div>
     </div>
-    <div class="card-actions justify-center">
-      <RouterLink
-        :to="{
-          name: 'GrapePage',
-          params: {
-            grapeId: grape.id,
-          },
-        }"
-        class="btn"
-        >Подробнее</RouterLink
-      >
-      <button class="btn">Добавить</button>
+    <div class="menu menu-horizontal justify-center join">
+      <div class="tooltip" data-tip="В избранное">
+        <label class="swap btn">
+          <input type="checkbox" />
+          <StarOutline class="swap-off" />
+          <StarSolid class="swap-on" />
+        </label>
+      </div>
+      <div class="tooltip" data-tip="Заметка">
+        <div class="btn">
+          <Book />
+        </div>
+      </div>
+      <div class="tooltip" data-tip="В конструктор">
+        <label class="swap btn">
+          <input type="checkbox" />
+          <SwatchOutline class="swap-off" />
+          <SwatchSolid class="swap-on" />
+        </label>
+      </div>
+      <div class="tooltip" data-tip="Подробнее">
+        <RouterLink
+          :to="{
+            name: 'GrapePage',
+            params: {
+              grapeId: grape.id,
+            },
+          }"
+          class="btn"
+          ><Bars
+        /></RouterLink>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import StarOutline from "../Icons/Outline/Star.vue";
+import StarSolid from "../Icons/Solid/Star.vue";
+import Bars from "../Icons/Outline/Bars.vue";
+import Bookmark from "../Icons/Outline/Bookmark.vue";
+import SwatchOutline from "../Icons/Outline/Swatch.vue";
+import SwatchSolid from "../Icons/Solid/Swatch.vue";
+import Book from "../Icons/Outline/Book.vue";
 
 const titles = ref({
   ABV: "Крепость",
