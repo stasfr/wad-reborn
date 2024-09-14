@@ -7,7 +7,12 @@
       <div class="dropdown dropdown-hover dropdown-end">
         <div tabindex="0" role="button" class="avatar rounded-full placeholder">
           <div class="bg-neutral text-neutral-content w-12 rounded-full">
-            <span>U</span>
+            <!-- TODO: при входе/выходе вылетает ошибка: Cannot read properties of undefined (reading 'charAt')  -->
+            <span>{{
+              userStore.user
+                ? userStore.user?.email.charAt(0).toUpperCase()
+                : "U"
+            }}</span>
           </div>
         </div>
         <ul tabindex="0" class="dropdown-content menu z-50 rounded bg-white">
@@ -23,8 +28,10 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { ref } from "vue";
+import { onMounted } from "vue";
 
 const userStore = useUserStore();
-const user = ref();
+onMounted(async () => {
+  await userStore.getSession();
+});
 </script>
