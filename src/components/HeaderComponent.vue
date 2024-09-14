@@ -20,7 +20,6 @@
           class="dropdown-content menu z-50 rounded bg-neutral mt-4"
         >
           <li><RouterLink to="/profile">Аккаунт</RouterLink></li>
-          <li><RouterLink to="/">Главная</RouterLink></li>
           <li><RouterLink to="/grapes">Виноград</RouterLink></li>
           <li><RouterLink to="/dices">Кубы</RouterLink></li>
           <li
