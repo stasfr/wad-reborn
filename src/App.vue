@@ -21,5 +21,3 @@ const layout = computed(() => {
   return layouts[layoutKey || "MainLayout"];
 });
 </script>
-
-<style scoped></style>

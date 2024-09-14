@@ -1,7 +1,9 @@
 <template>
-  <div class="wrapper">
+  <div
+    class="min-h-screen overflow-hidden flex flex-col transition-colors duration-300"
+  >
     <HeaderComponent />
-    <main class="page">
+    <main class="flex-auto my-24 box-content max-w-screen-xl mx-auto px-4">
       <slot />
     </main>
   </div>
@@ -10,5 +12,3 @@
 <script setup>
 import HeaderComponent from "@/components/HeaderComponent.vue";
 </script>
-
-<style scoped></style>
