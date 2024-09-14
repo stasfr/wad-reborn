@@ -1,20 +1,18 @@
 <template>
-  <div class="page__grapes grapes">
-    <div class="grapes__container _container">
-      <GrapeSearch />
-      <div class="grapes__body">
-        <GrapeCardLoadingComponent v-if="grapesStore.loading" />
-        <GrapeCardComponent
-          v-else
-          v-for="grape in grapesStore.grapes"
-          :grape="grape"
-        />
-      </div>
-      <!-- Скрытый элемент для infinite scroll -->
-      <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
-      <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
+  <section>
+    <GrapeSearch />
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <GrapeCardLoadingComponent v-if="grapesStore.loading" />
+      <GrapeCardComponent
+        v-else
+        v-for="grape in grapesStore.grapes"
+        :grape="grape"
+      />
     </div>
-  </div>
+    <!-- Скрытый элемент для infinite scroll -->
+    <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
+    <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
+  </section>
 </template>
 
 <script setup>
@@ -64,42 +62,3 @@ function handleIntersect(entries) {
   }
 }
 </script>
-
-<style scoped>
-.grapes__container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-.grapes__body {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 40px;
-  justify-content: space-around;
-  align-items: center;
-}
-@media (max-width: 1090px) {
-  .grapes__body {
-    grid-template-columns: repeat(2, auto);
-  }
-}
-@media (max-width: 730px) {
-  .grapes__body {
-    grid-template-columns: repeat(1, auto);
-  }
-}
-.grapes__load-btn {
-  font-size: large;
-  background-color: #500f1a;
-  color: #ffffff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  margin: 50px auto 0;
-  transition: all ease 0.5s;
-  border: 1px solid #500f1a;
-}
-.grapes__load-btn:hover {
-  background-color: #ffffff;
-  color: #500f1a;
-}
-</style>

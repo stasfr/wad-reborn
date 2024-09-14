@@ -1,29 +1,30 @@
 <template>
-  <form action="" class="login__form" @submit.prevent="">
-    <input
-      type="email"
-      class="login__input"
-      placeholder="email"
-      v-model="email"
-    />
-    <input
-      type="password"
-      class="login__input"
-      placeholder="password"
-      v-model="password"
-    />
-    <button class="login__btn" @click="getSession">
-      Проверить пользователя
-    </button>
-    <button class="login__btn" @click="signInWithPassword">Войти</button>
-    <button class="login__btn" @click="signUp">Регистрация</button>
-    <button class="login__btn" @click="signOut">Выйти</button>
+  <form class="flex flex-col space-y-4" @submit.prevent="">
+    <h2 class="text-center">Вход</h2>
+    <label class="input input-bordered flex items-center gap-2">
+      <input type="email" class="grow" placeholder="email" v-model="email" />
+      <Email />
+    </label>
+    <label class="input input-bordered flex items-center gap-2">
+      <input
+        type="password"
+        class="grow"
+        placeholder="password"
+        v-model="password"
+      />
+      <Password />
+    </label>
+
+    <button class="btn" @click="signInWithPassword">Войти</button>
+    <button class="btn" @click="signUp">Регистрация</button>
   </form>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
+import Email from "../Icons/Email.vue";
+import Password from "../Icons/Password.vue";
 
 const email = ref("stas240600@yandex.ru");
 const password = ref("password");
@@ -43,43 +44,4 @@ async function signInWithPassword() {
     password: password.value,
   });
 }
-
-async function getSession() {
-  const localUser = await userStore.getSession();
-}
-
-async function signOut() {
-  const signOut = await userStore.signOut();
-}
 </script>
-
-<style scoped>
-.login__form {
-  display: flex;
-  flex-direction: column;
-  width: 290px;
-  margin: 0 auto;
-}
-.login__form > * {
-  font-size: large;
-}
-.login__form > *:not(:last-child) {
-  margin-bottom: 20px;
-}
-.login__input {
-  padding: 20px 10px;
-  border: 1px solid #500a1f;
-  border-radius: 10px;
-}
-.login__btn {
-  padding: 20px 10px;
-  border: 1px solid #500a1f;
-  border-radius: 10px;
-  background-color: #ffffff;
-  transition: all ease 0.5s;
-}
-.login__btn:hover {
-  background-color: #500a1f;
-  color: #ffffff;
-}
-</style>

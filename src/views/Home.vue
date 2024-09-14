@@ -1,7 +1,3 @@
 <template>
-  <div class="_container">home page</div>
+  <div>home page</div>
 </template>
-
-<script setup></script>
-
-<style scoped></style>

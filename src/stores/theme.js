@@ -10,9 +10,8 @@ export const useThemeStore = defineStore("themeStore", () => {
     return themePreference ? JSON.parse(themePreference) : "dark";
   }
 
-  function changeTheme() {
-    theme.value = theme.value === "dark" ? "light" : "dark";
-
+  function changeTheme(newTheme) {
+    theme.value = newTheme;
     localStorage.setItem("theme_preference", JSON.stringify(theme.value));
   }
 

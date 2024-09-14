@@ -1,5 +1,5 @@
 <template>
-  <div class="_container">{{ userStore.user }}</div>
+  <div>{{ userStore.user }}</div>
 </template>
 
 <script setup>
@@ -12,5 +12,3 @@ onMounted(async () => {
   await userStore.getSession();
 });
 </script>
-
-<style scoped></style>

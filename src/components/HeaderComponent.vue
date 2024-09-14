@@ -1,7 +1,7 @@
 <template>
   <header class="absolute w-full left-0 top-0 z-50">
     <div
-      class="flex min-h-16 items-center justify-between box-content max-w-screen-xl mx-auto px-4"
+      class="flex min-h-16 items-center justify-between max-w-screen-xl mx-auto px-4"
     >
       <RouterLink to="/"> WineAndDices </RouterLink>
       <div class="dropdown dropdown-hover dropdown-end">

@@ -1,13 +1,11 @@
 <template>
-  <div class="grapes__search search">
-    <div class="search__nav">
-      <input
-        class="search__input"
-        type="text"
-        placeholder="Поиск"
-        v-model="search"
-      />
-    </div>
+  <div class="mb-4">
+    <input
+      class="text-xl input w-full text-center"
+      type="text"
+      placeholder="Поиск"
+      v-model="search"
+    />
   </div>
 </template>
 
@@ -21,30 +19,10 @@ const grapesStore = useGrapeStore();
 
 watch(search, async () => {
   if (search === "") {
-    await grapesStore.getGrapes();
+    // await grapesStore.getGrapes();
   } else {
-    await grapesStore.getGrapesByName(search);
+    // await grapesStore.getGrapesByName(search);
   }
+  console.log(search.value);
 });
 </script>
-
-<style scoped>
-.search {
-  margin-bottom: 20px;
-}
-.search__nav {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.search__input {
-  font-size: large;
-  text-align: center;
-  border-bottom: 1px solid #500a1f;
-  padding: 5px 0;
-  width: 100%;
-}
-.search__input:focus {
-  outline: none;
-}
-</style>

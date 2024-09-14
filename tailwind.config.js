@@ -15,4 +15,8 @@ export default {
     extend: {},
   },
   plugins: [daisyui],
+  daisyui: {
+    themes: true,
+    darkTheme: "business",
+  },
 };
