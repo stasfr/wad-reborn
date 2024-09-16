@@ -17,6 +17,7 @@
 
 <script setup>
 import { useGrapeStore } from "@/stores/grapes";
+import { useUserStore } from "@/stores/user";
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import GrapeCardComponent from "@/components/Grapes/GrapeCardComponent.vue";
 import GrapeCardLoadingComponent from "@/components/Grapes/GrapeCardLoadingComponent.vue";
@@ -28,7 +29,15 @@ const observerInstance = ref(null); // Ссылка на экземпляр Inte
 
 onMounted(async () => {
   if (grapesStore.grapes.length === 0) {
-    await grapesStore.getGrapes();
+    const userStore = useUserStore();
+    const userSession = await userStore.getSession();
+    let userId = null;
+
+    if (userSession.data) {
+      userId = userStore.user.id;
+    }
+
+    await grapesStore.getGrapes(userId);
     await grapesStore.getAllGrapesCount();
   }
 

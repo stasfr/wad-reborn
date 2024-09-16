@@ -20,7 +20,13 @@
     </div>
     <div class="menu menu-horizontal justify-center join">
       <div class="tooltip" data-tip="В избранное">
-        <label class="swap btn">
+        <label v-if="grape.isFavorite" class="swap btn">
+          <input type="checkbox" />
+          <StarOutline class="swap-on" />
+          <StarSolid class="swap-off" />
+        </label>
+        <!-- TODO: добавить "удалить из избранного" -->
+        <label v-else class="swap btn">
           <input type="checkbox" />
           <StarOutline class="swap-off" />
           <StarSolid class="swap-on" />
@@ -56,10 +62,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { API } from "@/services/controller";
 import StarOutline from "../Icons/Outline/Star.vue";
 import StarSolid from "../Icons/Solid/Star.vue";
 import Bars from "../Icons/Outline/Bars.vue";
-import Bookmark from "../Icons/Outline/Bookmark.vue";
 import SwatchOutline from "../Icons/Outline/Swatch.vue";
 import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
@@ -78,4 +84,12 @@ const props = defineProps({
     required: true,
   },
 });
+
+async function toggleGrapeFavoriteStatus(userId, grapeId, isFavorite) {
+  if (isFavorite === true) {
+    await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
+  } else if (isFavorite === false) {
+    await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
+  }
+}
 </script>

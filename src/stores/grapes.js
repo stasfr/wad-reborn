@@ -8,6 +8,7 @@ export const useGrapeStore = defineStore("grapesStore", () => {
   const loading = ref(false);
   const allCount = ref(0);
   const isAllGrapesLoaded = ref(false);
+  const favoriteGrapesOfUser = ref([]);
 
   async function getAllGrapesCount() {
     try {
@@ -20,10 +21,13 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     }
   }
 
-  async function getGrapes() {
+  async function getGrapes(userId = null) {
     try {
       // включаем skeleton loading
       if (grapes.value.length === 0) loading.value = true;
+
+      // грузим все избранные винограды пользователя
+      await getAllFavoriteGrapesByUserId(userId);
 
       // грузим общее кол-во объектов в бд
       if (allCount.value === 0) await getAllGrapesCount();
@@ -32,7 +36,6 @@ export const useGrapeStore = defineStore("grapesStore", () => {
 
       const data = await API.Grapes.getGrapes(offset);
 
-      //TODO: отлавливаться пустой респонс (объекта нет в бд) (мб на основе data.status)
       if (data.error) throw Error(data.error);
 
       grapes.value.push(...data.data);
@@ -41,7 +44,23 @@ export const useGrapeStore = defineStore("grapesStore", () => {
         isAllGrapesLoaded.value = true;
       }
 
+      favoriteGrapesOfUser.value.forEach((element) => {
+        setGrapeFavorite(element.grape_id);
+      });
+      console.log(grapes.value);
+
       loading.value = false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getAllFavoriteGrapesByUserId(userId) {
+    try {
+      const data = await API.UserGrapes.getAllFavoriteGrapesByUserId(userId);
+      if (data.error) throw Error(data.error);
+
+      favoriteGrapesOfUser.value = data.data;
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +92,16 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function setGrapeFavorite(grapeId) {
+    grapes.value.forEach((element) => {
+      if (element.id === grapeId) {
+        element.isFavorite = true;
+      } else {
+        element.isFavorite = false;
+      }
+    });
   }
 
   return {
