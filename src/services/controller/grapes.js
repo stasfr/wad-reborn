@@ -8,13 +8,18 @@ async function getAllGrapesCount() {
 }
 
 async function getGrapes(offset = 0, userId = null) {
-  return await supabase
+  let query = supabase
     .from("Grape")
     .select(
       "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name),Favorite(created_at)"
     )
-    .filter("Favorite.user_id", "eq", userId)
     .range(offset, offset + 20);
+
+  if (userId) {
+    query = query.filter("Favorite.user_id", "eq", userId);
+  }
+
+  return await query;
 }
 
 async function getGrapeById(id) {

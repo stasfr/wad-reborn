@@ -69,6 +69,9 @@ import SwatchOutline from "../Icons/Outline/Swatch.vue";
 import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
 
+const userStore = useUserStore();
+const user = ref(userStore.user);
+
 const titles = ref({
   ABV: "Крепость",
   body: "Тельность",
@@ -85,15 +88,19 @@ const props = defineProps({
 });
 
 async function toggleGrapeFavoriteStatus() {
-  const userId = useUserStore().user.id;
+  const userId = useUserStore().user?.id;
   const grapeId = props.grape.id;
+  let data;
 
   if (favoriteCheckbox.value === true) {
-    await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
+    data = await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
   } else if (favoriteCheckbox.value === false) {
-    await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
-  } else {
-    throw Error("Something wrong");
+    data = await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
+  }
+
+  // если прилетела ошибка с бека
+  if (data.error) {
+    favoriteCheckbox.value = !favoriteCheckbox;
   }
 }
 

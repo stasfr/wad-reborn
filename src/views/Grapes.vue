@@ -23,17 +23,17 @@ import GrapeCardComponent from "@/components/Grapes/GrapeCardComponent.vue";
 import GrapeCardLoadingComponent from "@/components/Grapes/GrapeCardLoadingComponent.vue";
 import GrapeSearch from "@/components/Grapes/GrapeSearch.vue";
 
+const userStore = useUserStore();
 const grapesStore = useGrapeStore();
 const observer = ref(null); // Ссылка на элемент для наблюдения
 const observerInstance = ref(null); // Ссылка на экземпляр IntersectionObserver
 
 onMounted(async () => {
   if (grapesStore.grapes.length === 0) {
-    const userStore = useUserStore();
     const userSession = await userStore.getSession();
     let userId = null;
 
-    if (userSession.data) {
+    if (userSession.data.session) {
       userId = userStore.user.id;
     }
 
