@@ -38,7 +38,12 @@
       </div>
       <div class="tooltip" data-tip="В конструктор">
         <label class="swap btn">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            v-model="constructorCheckbox"
+            @click="toggleGrapeConstructorStatus"
+            :disabled="isDisabled"
+          />
           <SwatchOutline class="swap-off" />
           <SwatchSolid class="swap-on" />
         </label>
@@ -109,5 +114,28 @@ async function toggleGrapeFavoriteStatus() {
   isDisabled.value = false;
 }
 
+async function toggleGrapeConstructorStatus() {
+  const userId = userStore.user?.id;
+  const grapeId = props.grape.id;
+  const isAdded = constructorCheckbox.value;
+
+  isDisabled.value = true;
+
+  const constructorToggleResult = await grapeStore.toggleGrapeConstructorStatus(
+    userId,
+    grapeId,
+    isAdded
+  );
+
+  if (!constructorToggleResult) {
+    constructorCheckbox.value = !constructorCheckbox.value;
+  }
+
+  isDisabled.value = false;
+}
+
 const favoriteCheckbox = ref(props.grape.Favorite.length === 1 ? true : false);
+const constructorCheckbox = ref(
+  props.grape.GrapeConstructor.length === 1 ? true : false
+);
 </script>

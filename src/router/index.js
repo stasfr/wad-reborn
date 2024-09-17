@@ -2,8 +2,9 @@ import { useUserStore } from "@/stores/user";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Dices from "@/views/Dices.vue";
-import Grapes from "@/views/Grapes.vue";
-import GrapePage from "@/views/GrapePage.vue";
+import Grapes from "@/views/Grapes/Grapes.vue";
+import GrapePage from "@/views/Grapes/GrapePage.vue";
+import Constructor from "@/views/Grapes/Constructor.vue";
 import NotFound from "@/views/NotFound.vue";
 import Login from "@/views/Login.vue";
 import UserProfile from "@/views/UserProfile.vue";
@@ -28,6 +29,12 @@ const router = createRouter({
       name: "GrapePage",
       component: GrapePage,
       meta: { title: "Grapes", requiresAuth: false },
+    },
+    {
+      path: "/grapes/constructor",
+      name: "GrapeConstructor",
+      component: Constructor,
+      meta: { title: "Grape Constructor", requiresAuth: true },
     },
     {
       path: "/dices",

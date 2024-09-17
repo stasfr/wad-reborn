@@ -17,6 +17,7 @@
         >
           <li><RouterLink to="/profile">Аккаунт</RouterLink></li>
           <li><RouterLink to="/grapes">Виноград</RouterLink></li>
+          <li><RouterLink to="/grapes/constructor">Конструктор</RouterLink></li>
           <li><RouterLink to="/dices">Кубы</RouterLink></li>
           <li
             v-if="userStore.user"

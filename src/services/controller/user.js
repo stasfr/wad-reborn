@@ -14,7 +14,23 @@ async function removeGrapeFromFavorite(userId, grapeId) {
     .eq("grape_id", grapeId);
 }
 
+async function addGrapeToGrapeConstructor(userId, grapeId) {
+  return await supabase
+    .from("GrapeConstructor")
+    .insert([{ user_id: userId, grape_id: grapeId }]);
+}
+
+async function removeGrapeFromGrapeConstructor(userId, grapeId) {
+  return await supabase
+    .from("GrapeConstructor")
+    .delete()
+    .eq("user_id", userId)
+    .eq("grape_id", grapeId);
+}
+
 export default {
   addGrapeToFavorite,
   removeGrapeFromFavorite,
+  addGrapeToGrapeConstructor,
+  removeGrapeFromGrapeConstructor,
 };

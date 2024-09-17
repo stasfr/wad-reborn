@@ -4,6 +4,7 @@ import { API } from "@/services/controller";
 
 export const useGrapeStore = defineStore("grapesStore", () => {
   const grapes = ref([]);
+  const constructor = ref([]);
   const loading = ref(false);
   const allCount = ref(0);
   const isAllGrapesLoaded = ref(false);
@@ -40,6 +41,19 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     }
   }
 
+  async function getConstructor() {
+    try {
+      const data = await API.Grapes.getGrapesInConstructor();
+      if (data.error) throw Error(data.error);
+
+      // TODO: сделать чек на заполненность конструктора, как в grapes
+      constructor.value = [];
+      constructor.value.push(...data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function toggleGrapeFavoriteStatus(userId, grapeId, isFavorite) {
     try {
       let data = null;
@@ -68,13 +82,44 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     }
   }
 
+  async function toggleGrapeConstructorStatus(userId, grapeId, isAdded) {
+    try {
+      let data = null;
+
+      if (isAdded === true) {
+        data = await API.User.removeGrapeFromGrapeConstructor(userId, grapeId);
+        grapes.value.forEach((element) => {
+          if (element.id === grapeId) {
+            element["GrapeConstructor"] = [];
+          }
+        });
+      } else if (isAdded === false) {
+        data = await API.User.addGrapeToGrapeConstructor(userId, grapeId);
+        grapes.value.forEach((element) => {
+          if (element.id === grapeId) {
+            element["GrapeConstructor"] = [Date.now()];
+          }
+        });
+      }
+
+      if (data.error) throw Error(data.error);
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     grapes,
     loading,
     allCount,
     isAllGrapesLoaded,
+    constructor,
     getGrapes,
     getAllGrapesCount,
     toggleGrapeFavoriteStatus,
+    toggleGrapeConstructorStatus,
+    getConstructor,
   };
 });
