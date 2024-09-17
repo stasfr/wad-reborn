@@ -94,9 +94,9 @@ async function toggleGrapeFavoriteStatus() {
   let data;
   isDisabled.value = true;
   if (favoriteCheckbox.value === true) {
-    data = await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
+    data = await API.User.removeGrapeFromFavorite(userId, grapeId);
   } else if (favoriteCheckbox.value === false) {
-    data = await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
+    data = await API.User.addGrapeToFavorite(userId, grapeId);
   }
   isDisabled.value = false;
   // если прилетела ошибка с бека

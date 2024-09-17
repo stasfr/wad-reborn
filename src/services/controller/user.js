@@ -1,30 +1,20 @@
 import { supabase } from "@/services/supabase";
 
-async function signUp({ email, password }) {
-  return await supabase.auth.signUp({
-    email,
-    password,
-  });
+async function addGrapeToFavorite(userId, grapeId) {
+  return await supabase
+    .from("Favorite")
+    .insert([{ user_id: userId, grape_id: grapeId }]);
 }
 
-async function signInWithPassword({ email, password }) {
-  return await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-}
-
-async function getSession() {
-  return await supabase.auth.getSession();
-}
-
-async function signOut() {
-  return await supabase.auth.signOut();
+async function removeGrapeFromFavorite(userId, grapeId) {
+  return await supabase
+    .from("Favorite")
+    .delete()
+    .eq("user_id", userId)
+    .eq("grape_id", grapeId);
 }
 
 export default {
-  signUp,
-  signInWithPassword,
-  getSession,
-  signOut,
+  addGrapeToFavorite,
+  removeGrapeFromFavorite,
 };

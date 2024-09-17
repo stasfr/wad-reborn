@@ -7,7 +7,7 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function signUp({ email, password }) {
     try {
-      const data = await API.User.signUp({ email, password });
+      const data = await API.Auth.signUp({ email, password });
       if (data.error) throw Error(data.error);
     } catch (error) {
       console.log(error);
@@ -16,7 +16,7 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function signInWithPassword({ email, password }) {
     try {
-      const data = await API.User.signInWithPassword({ email, password });
+      const data = await API.Auth.signInWithPassword({ email, password });
       if (data.error) throw Error(data.error);
       user.value = data.data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function getSession() {
     try {
-      const data = await API.User.getSession();
+      const data = await API.Auth.getSession();
       if (data.data.session) {
         user.value = data.data.session.user;
       }
@@ -40,7 +40,7 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function signOut() {
     try {
-      const data = await API.User.signOut();
+      const data = await API.Auth.signOut();
       user.value = {};
 
       if (data.error) throw Error(data.error);
@@ -52,7 +52,7 @@ export const useUserStore = defineStore("userStore", () => {
 
   async function getUserId() {
     try {
-      const data = await API.User.getSession();
+      const data = await API.Auth.getSession();
       if (data.data.session) {
         user.value = data.data.session.user;
       }

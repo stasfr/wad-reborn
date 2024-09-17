@@ -1,9 +1,9 @@
 import grapesController from "@/services/controller/grapes";
+import authController from "@/services/controller/auth";
 import userController from "@/services/controller/user";
-import userGrapesController from "@/services/controller/userGrapes";
 
 export const API = {
   Grapes: grapesController,
+  Auth: authController,
   User: userController,
-  UserGrapes: userGrapesController,
 };
