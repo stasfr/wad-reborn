@@ -20,14 +20,12 @@
     </div>
     <div class="menu menu-horizontal justify-center join">
       <div class="tooltip" data-tip="В избранное">
-        <label v-if="grape.isFavorite" class="swap btn">
-          <input type="checkbox" />
-          <StarOutline class="swap-on" />
-          <StarSolid class="swap-off" />
-        </label>
-        <!-- TODO: добавить "удалить из избранного" -->
-        <label v-else class="swap btn">
-          <input type="checkbox" />
+        <label class="swap btn">
+          <input
+            type="checkbox"
+            v-model="favoriteCheckbox"
+            @click="toggleGrapeFavoriteStatus"
+          />
           <StarOutline class="swap-off" />
           <StarSolid class="swap-on" />
         </label>
@@ -63,6 +61,7 @@
 <script setup>
 import { ref } from "vue";
 import { API } from "@/services/controller";
+import { useUserStore } from "@/stores/user";
 import StarOutline from "../Icons/Outline/Star.vue";
 import StarSolid from "../Icons/Solid/Star.vue";
 import Bars from "../Icons/Outline/Bars.vue";
@@ -85,11 +84,18 @@ const props = defineProps({
   },
 });
 
-async function toggleGrapeFavoriteStatus(userId, grapeId, isFavorite) {
-  if (isFavorite === true) {
+async function toggleGrapeFavoriteStatus() {
+  const userId = useUserStore().user.id;
+  const grapeId = props.grape.id;
+
+  if (favoriteCheckbox.value === true) {
     await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
-  } else if (isFavorite === false) {
+  } else if (favoriteCheckbox.value === false) {
     await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
+  } else {
+    throw Error("Something wrong");
   }
 }
+
+const favoriteCheckbox = ref(props.grape.Favorite.length === 1 ? true : false);
 </script>

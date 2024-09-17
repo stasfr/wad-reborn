@@ -7,12 +7,13 @@ async function getAllGrapesCount() {
   return { count, error };
 }
 
-async function getGrapes(offset = 0) {
+async function getGrapes(offset = 0, userId = null) {
   return await supabase
     .from("Grape")
     .select(
-      "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name))"
+      "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name),Favorite(created_at)"
     )
+    .filter("Favorite.user_id", "eq", userId)
     .range(offset, offset + 20);
 }
 
@@ -20,8 +21,9 @@ async function getGrapeById(id) {
   return await supabase
     .from("Grape")
     .select(
-      "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name))"
+      "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name),Favorite(created_at)"
     )
+    .filter("Favorite.user_id", "eq", userId)
     .eq("id", id);
 }
 
