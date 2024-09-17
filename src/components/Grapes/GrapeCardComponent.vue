@@ -25,6 +25,7 @@
             type="checkbox"
             v-model="favoriteCheckbox"
             @click="toggleGrapeFavoriteStatus"
+            :disabled="isDisabled"
           />
           <StarOutline class="swap-off" />
           <StarSolid class="swap-on" />
@@ -70,7 +71,7 @@ import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
 
 const userStore = useUserStore();
-const user = ref(userStore.user);
+const isDisabled = ref(false);
 
 const titles = ref({
   ABV: "Крепость",
@@ -88,16 +89,16 @@ const props = defineProps({
 });
 
 async function toggleGrapeFavoriteStatus() {
-  const userId = useUserStore().user?.id;
+  const userId = userStore.user?.id;
   const grapeId = props.grape.id;
   let data;
-
+  isDisabled.value = true;
   if (favoriteCheckbox.value === true) {
     data = await API.UserGrapes.removeGrapeFromFavorite(userId, grapeId);
   } else if (favoriteCheckbox.value === false) {
     data = await API.UserGrapes.addGrapeToFavorite(userId, grapeId);
   }
-
+  isDisabled.value = false;
   // если прилетела ошибка с бека
   if (data.error) {
     favoriteCheckbox.value = !favoriteCheckbox;
