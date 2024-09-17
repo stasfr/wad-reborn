@@ -1,5 +1,4 @@
 import { useUserStore } from "@/stores/user";
-import { useGrapeStore } from "@/stores/grapes";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Dices from "@/views/Dices.vue";
@@ -37,7 +36,6 @@ const router = createRouter({
       meta: { title: "Dices", requiresAuth: false },
     },
     {
-      //TODO: добавить редирект на /profile, после входа в акк
       path: "/login",
       name: "Login",
       component: Login,
@@ -58,7 +56,7 @@ const router = createRouter({
   ],
 });
 
-async function getUser(next) {
+async function redirectToLogin(next) {
   const userStore = useUserStore();
   const localUser = await userStore.getSession();
   if (localUser.data.session === null) {
@@ -68,16 +66,23 @@ async function getUser(next) {
   }
 }
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    getUser(next);
+async function redirectToProfile(next) {
+  const userStore = useUserStore();
+  const localUser = await userStore.getSession();
+  if (localUser.data.session !== null) {
+    next("/profile");
   } else {
     next();
   }
+}
 
-  if (from.fullPath === `/grapes/${from.params.grapeId}`) {
-    const grapesStore = useGrapeStore();
-    grapesStore.grape = {};
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    redirectToLogin(next);
+  } else if (to.path === "/login") {
+    redirectToProfile(next);
+  } else {
+    next();
   }
 });
 
