@@ -8,11 +8,7 @@
         <div tabindex="0" role="button" class="avatar rounded-full placeholder">
           <div class="bg-neutral text-neutral-content w-12 rounded-full">
             <!-- TODO: при входе/выходе вылетает ошибка: Cannot read properties of undefined (reading 'charAt')  -->
-            <span>{{
-              userStore.user
-                ? userStore.user?.email.charAt(0).toUpperCase()
-                : "U"
-            }}</span>
+            <span>{{ user ? user.email?.charAt(0).toUpperCase() : "U" }}</span>
           </div>
         </div>
         <ul
@@ -36,11 +32,13 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
+const user = ref({});
 const userStore = useUserStore();
+
 onMounted(async () => {
-  await userStore.getSession();
+  user.value = await userStore.getUser();
 });
 
 async function signOut() {

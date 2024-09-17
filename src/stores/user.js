@@ -64,5 +64,29 @@ export const useUserStore = defineStore("userStore", () => {
     }
   }
 
-  return { user, signUp, signInWithPassword, getSession, signOut, getUserId };
+  async function getUser() {
+    try {
+      const data = await API.Auth.getSession();
+      if (data.data.session) {
+        user.value = data.data.session.user;
+        return data.data.session.user;
+      } else {
+      }
+
+      if (data.error) throw Error(data.error);
+      return null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return {
+    user,
+    signUp,
+    signInWithPassword,
+    getSession,
+    signOut,
+    getUserId,
+    getUser,
+  };
 });

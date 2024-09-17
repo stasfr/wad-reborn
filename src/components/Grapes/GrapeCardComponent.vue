@@ -61,8 +61,8 @@
 
 <script setup>
 import { ref } from "vue";
-import { API } from "@/services/controller";
 import { useUserStore } from "@/stores/user";
+import { useGrapeStore } from "@/stores/grapes";
 import StarOutline from "../Icons/Outline/Star.vue";
 import StarSolid from "../Icons/Solid/Star.vue";
 import Bars from "../Icons/Outline/Bars.vue";
@@ -71,6 +71,7 @@ import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
 
 const userStore = useUserStore();
+const grapeStore = useGrapeStore();
 const isDisabled = ref(false);
 
 const titles = ref({
@@ -91,18 +92,21 @@ const props = defineProps({
 async function toggleGrapeFavoriteStatus() {
   const userId = userStore.user?.id;
   const grapeId = props.grape.id;
-  let data;
+  const isFavorite = favoriteCheckbox.value;
+
   isDisabled.value = true;
-  if (favoriteCheckbox.value === true) {
-    data = await API.User.removeGrapeFromFavorite(userId, grapeId);
-  } else if (favoriteCheckbox.value === false) {
-    data = await API.User.addGrapeToFavorite(userId, grapeId);
+
+  const favoriteToggleResult = await grapeStore.toggleGrapeFavoriteStatus(
+    userId,
+    grapeId,
+    isFavorite
+  );
+
+  if (!favoriteToggleResult) {
+    favoriteCheckbox.value = !favoriteCheckbox.value;
   }
+
   isDisabled.value = false;
-  // если прилетела ошибка с бека
-  if (data.error) {
-    favoriteCheckbox.value = !favoriteCheckbox;
-  }
 }
 
 const favoriteCheckbox = ref(props.grape.Favorite.length === 1 ? true : false);

@@ -40,6 +40,34 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     }
   }
 
+  async function toggleGrapeFavoriteStatus(userId, grapeId, isFavorite) {
+    try {
+      let data = null;
+
+      if (isFavorite === true) {
+        data = await API.User.removeGrapeFromFavorite(userId, grapeId);
+        grapes.value.forEach((element) => {
+          if (element.id === grapeId) {
+            element["Favorite"] = [];
+          }
+        });
+      } else if (isFavorite === false) {
+        data = await API.User.addGrapeToFavorite(userId, grapeId);
+        grapes.value.forEach((element) => {
+          if (element.id === grapeId) {
+            element["Favorite"] = [Date.now()];
+          }
+        });
+      }
+
+      if (data.error) throw Error(data.error);
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     grapes,
     loading,
@@ -47,5 +75,6 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     isAllGrapesLoaded,
     getGrapes,
     getAllGrapesCount,
+    toggleGrapeFavoriteStatus,
   };
 });
