@@ -4,7 +4,6 @@ import { API } from "@/services/controller";
 
 export const useGrapeStore = defineStore("grapesStore", () => {
   const grapes = ref([]);
-  const grape = ref({});
   const loading = ref(false);
   const allCount = ref(0);
   const isAllGrapesLoaded = ref(false);
@@ -22,18 +21,13 @@ export const useGrapeStore = defineStore("grapesStore", () => {
 
   async function getGrapes(userId = null) {
     try {
-      // включаем skeleton loading
       if (grapes.value.length === 0) loading.value = true;
 
-      // грузим общее кол-во объектов в бд
       if (allCount.value === 0) await getAllGrapesCount();
 
       const offset = grapes.value.length;
-
       const data = await API.Grapes.getGrapes(offset, userId);
-
       if (data.error) throw Error(data.error);
-
       grapes.value.push(...data.data);
 
       if (grapes.value.length === allCount.value) {
@@ -46,43 +40,12 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     }
   }
 
-  async function getSingleGrape(id) {
-    try {
-      loading.value = true;
-      const data = await API.Grapes.getGrapeById(id);
-      if (data.error) throw Error(data.error);
-
-      grape.value = data.data;
-      loading.value = false;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getGrapesByName(name) {
-    try {
-      loading.value = true;
-      const data = await API.Grapes.getGrapesByName(name);
-      console.log(data);
-
-      if (data.error) throw Error(data.error);
-
-      grape.value = data.data;
-      loading.value = false;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return {
     grapes,
-    grape,
     loading,
     allCount,
     isAllGrapesLoaded,
     getGrapes,
-    getSingleGrape,
     getAllGrapesCount,
-    getGrapesByName,
   };
 });

@@ -50,5 +50,19 @@ export const useUserStore = defineStore("userStore", () => {
     }
   }
 
-  return { user, signUp, signInWithPassword, getSession, signOut };
+  async function getUserId() {
+    try {
+      const data = await API.User.getSession();
+      if (data.data.session) {
+        user.value = data.data.session.user;
+      }
+
+      if (data.error) throw Error(data.error);
+      return data.data.session.user.id;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return { user, signUp, signInWithPassword, getSession, signOut, getUserId };
 });

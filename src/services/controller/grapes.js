@@ -1,10 +1,7 @@
 import { supabase } from "@/services/supabase";
 
 async function getAllGrapesCount() {
-  const { count, error } = await supabase
-    .from("Grape")
-    .select("*", { count: "exact" });
-  return { count, error };
+  return await supabase.from("Grape").select("*", { count: "exact" });
 }
 
 async function getGrapes(offset = 0, userId = null) {
@@ -22,23 +19,23 @@ async function getGrapes(offset = 0, userId = null) {
   return await query;
 }
 
-async function getGrapeById(id) {
-  return await supabase
+async function getGrapeById(id, userId = null) {
+  let query = supabase
     .from("Grape")
     .select(
       "*, GrapeWineType(WineType(name,abbreviation)),Rarity(name),GlassType(name),Favorite(created_at)"
     )
-    .filter("Favorite.user_id", "eq", userId)
     .eq("id", id);
-}
 
-async function getGrapesByName(name) {
-  return await supabase.from("Grape").select("*").in("name", [name]);
+  if (userId) {
+    query = query.filter("Favorite.user_id", "eq", userId);
+  }
+
+  return await query;
 }
 
 export default {
   getGrapes,
   getGrapeById,
   getAllGrapesCount,
-  getGrapesByName,
 };
