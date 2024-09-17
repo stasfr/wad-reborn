@@ -43,7 +43,8 @@ onMounted(async () => {
   await userStore.getSession();
 });
 
-function signOut() {
-  const signOut = userStore.signOut();
+async function signOut() {
+  const signOut = await userStore.signOut();
+  window.location.reload();
 }
 </script>

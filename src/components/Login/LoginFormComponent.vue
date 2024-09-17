@@ -3,7 +3,7 @@
     <h2 class="text-center">Вход</h2>
     <label class="input input-bordered flex items-center gap-2">
       <input type="email" class="grow" placeholder="email" v-model="email" />
-      <Email />
+      <EmailIcon />
     </label>
     <label class="input input-bordered flex items-center gap-2">
       <input
@@ -12,7 +12,7 @@
         placeholder="password"
         v-model="password"
       />
-      <Password />
+      <PasswordIcon />
     </label>
 
     <button class="btn" @click="signInWithPassword">Войти</button>
@@ -23,8 +23,8 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
-import Email from "../Icons/Email.vue";
-import Password from "../Icons/Password.vue";
+import EmailIcon from "../Icons/Email.vue";
+import PasswordIcon from "../Icons/Password.vue";
 
 const email = ref("stas240600@yandex.ru");
 const password = ref("password");
@@ -36,6 +36,7 @@ async function signUp() {
     email: email.value,
     password: password.value,
   });
+  window.location.reload();
 }
 
 async function signInWithPassword() {
@@ -43,5 +44,6 @@ async function signInWithPassword() {
     email: email.value,
     password: password.value,
   });
+  window.location.reload();
 }
 </script>
