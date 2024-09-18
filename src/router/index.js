@@ -7,6 +7,7 @@ import Grape from "@/views/Grapes/Grape.vue";
 import Constructor from "@/views/Grapes/Constructor.vue";
 import NotFound from "@/views/NotFound.vue";
 import Login from "@/views/User/Login.vue";
+import Register from "@/views/User/Register.vue";
 import UserProfile from "@/views/User/UserProfile.vue";
 
 const router = createRouter({
@@ -47,6 +48,12 @@ const router = createRouter({
       name: "Login",
       component: Login,
       meta: { title: "Login", requiresAuth: false },
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register,
+      meta: { title: "Register", requiresAuth: false },
     },
     {
       path: "/profile",

@@ -15,10 +15,19 @@
           tabindex="0"
           class="dropdown-content menu z-50 rounded bg-neutral mt-4"
         >
-          <li><RouterLink to="/profile">Аккаунт</RouterLink></li>
           <li><RouterLink to="/grapes">Виноград</RouterLink></li>
           <li><RouterLink to="/grapes/constructor">Конструктор</RouterLink></li>
           <li><RouterLink to="/dices">Кубы</RouterLink></li>
+          <div class="divider"></div>
+          <li v-if="!userStore.user">
+            <RouterLink to="/login">Войти</RouterLink>
+          </li>
+          <li v-if="!userStore.user">
+            <RouterLink to="/register">Регистрация</RouterLink>
+          </li>
+          <li v-if="userStore.user">
+            <RouterLink to="/profile">Аккаунт</RouterLink>
+          </li>
           <li
             v-if="userStore.user"
             class="bg-accent text-accent-content rounded"
