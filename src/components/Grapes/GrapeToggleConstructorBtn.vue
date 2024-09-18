@@ -1,0 +1,62 @@
+<template>
+  <div class="tooltip" :data-tip="getTooltipTitle()">
+    <label class="swap btn">
+      <input
+        type="checkbox"
+        v-model="checkbox"
+        @click="toggleGrapeConstructorStatus"
+        :disabled="isDisabled"
+      />
+      <SwatchOutline class="swap-off" />
+      <SwatchSolid class="swap-on" />
+    </label>
+  </div>
+</template>
+
+<script setup>
+import { defineProps, ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useGrapeStore } from "@/stores/grapes";
+import SwatchOutline from "../Icons/Outline/Swatch.vue";
+import SwatchSolid from "../Icons/Solid/Swatch.vue";
+
+const userStore = useUserStore();
+const grapeStore = useGrapeStore();
+
+const props = defineProps({
+  grapeConstructor: {
+    type: Array,
+    required: true,
+  },
+  grapeId: {
+    type: Number,
+    required: true,
+  },
+});
+
+const isDisabled = ref(false);
+const checkbox = ref(props.grapeConstructor?.length === 1 ? true : false);
+
+async function toggleGrapeConstructorStatus() {
+  const isAdded = checkbox.value;
+  const userId = ref(await userStore.getUserId());
+
+  isDisabled.value = true;
+
+  const constructorToggleResult = await grapeStore.toggleGrapeConstructorStatus(
+    userId.value,
+    props.grapeId,
+    isAdded
+  );
+
+  if (!constructorToggleResult) {
+    checkbox.value = !checkbox.value;
+  }
+
+  isDisabled.value = false;
+}
+
+function getTooltipTitle() {
+  return checkbox.value ? "Удалить из конструктора" : "В конструктор";
+}
+</script>

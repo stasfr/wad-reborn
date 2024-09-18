@@ -18,15 +18,10 @@
       </div>
     </div>
     <div class="menu menu-horizontal justify-center join">
-      <GrapeToggleBtn
-        :clickFunction="grapeStore.toggleGrapeFavoriteStatus"
-        :conditionArray="props.grape.Favorite"
-        :tooltipTitles="{ on: 'Удалить из избранного', off: 'В избранное' }"
+      <GrapeToggleFavoriteBtn
         :grapeId="props.grape.id"
-      >
-        <StarOutline class="swap-off" />
-        <StarSolid class="swap-on" />
-      </GrapeToggleBtn>
+        :favorite="props.grape.Favorite"
+      />
 
       <div class="tooltip" data-tip="Заметка">
         <div class="btn">
@@ -34,15 +29,10 @@
         </div>
       </div>
 
-      <GrapeToggleBtn
-        :clickFunction="grapeStore.toggleGrapeConstructorStatus"
-        :conditionArray="props.grape.GrapeConstructor"
-        :tooltipTitles="{ on: 'Удалить из конструктора', off: 'В конструктор' }"
+      <GrapeToggleConstructorBtn
         :grapeId="props.grape.id"
-      >
-        <SwatchOutline class="swap-off" />
-        <SwatchSolid class="swap-on" />
-      </GrapeToggleBtn>
+        :grapeConstructor="props.grape.GrapeConstructor"
+      />
 
       <div class="tooltip" data-tip="Подробнее">
         <RouterLink
@@ -62,12 +52,9 @@
 
 <script setup>
 import { useGrapeStore } from "@/stores/grapes";
-import GrapeToggleBtn from "./GrapeToggleBtn.vue";
-import StarOutline from "../Icons/Outline/Star.vue";
-import StarSolid from "../Icons/Solid/Star.vue";
+import GrapeToggleFavoriteBtn from "./GrapeToggleFavoriteBtn.vue";
+import GrapeToggleConstructorBtn from "./GrapeToggleConstructorBtn.vue";
 import Bars from "../Icons/Outline/Bars.vue";
-import SwatchOutline from "../Icons/Outline/Swatch.vue";
-import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
 
 const grapeStore = useGrapeStore();
