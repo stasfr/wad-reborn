@@ -7,10 +7,9 @@
     <div class="flex flex-col">
       <div
         v-for="(value, key) in grape.taste_profile"
-        :data-tip="titles[key]"
         class="flex items-center gap-2"
       >
-        <p class="flex-[45%]">{{ titles[key] }}</p>
+        <p class="flex-[45%]">{{ grapeStore.tasteProfileTitles[key] }}</p>
         <progress
           class="progress flex-[55%]"
           :value="value * 10"
@@ -19,35 +18,32 @@
       </div>
     </div>
     <div class="menu menu-horizontal justify-center join">
-      <div class="tooltip" data-tip="В избранное">
-        <label class="swap btn">
-          <input
-            type="checkbox"
-            v-model="favoriteCheckbox"
-            @click="toggleGrapeFavoriteStatus"
-            :disabled="isDisabled"
-          />
-          <StarOutline class="swap-off" />
-          <StarSolid class="swap-on" />
-        </label>
-      </div>
+      <GrapeToggleBtn
+        :clickFunction="grapeStore.toggleGrapeFavoriteStatus"
+        :conditionArray="props.grape.Favorite"
+        :tooltipTitles="{ on: 'Удалить из избранного', off: 'В избранное' }"
+        :grapeId="props.grape.id"
+      >
+        <StarOutline class="swap-off" />
+        <StarSolid class="swap-on" />
+      </GrapeToggleBtn>
+
       <div class="tooltip" data-tip="Заметка">
         <div class="btn">
           <Book />
         </div>
       </div>
-      <div class="tooltip" data-tip="В конструктор">
-        <label class="swap btn">
-          <input
-            type="checkbox"
-            v-model="constructorCheckbox"
-            @click="toggleGrapeConstructorStatus"
-            :disabled="isDisabled"
-          />
-          <SwatchOutline class="swap-off" />
-          <SwatchSolid class="swap-on" />
-        </label>
-      </div>
+
+      <GrapeToggleBtn
+        :clickFunction="grapeStore.toggleGrapeConstructorStatus"
+        :conditionArray="props.grape.GrapeConstructor"
+        :tooltipTitles="{ on: 'Удалить из конструктора', off: 'В конструктор' }"
+        :grapeId="props.grape.id"
+      >
+        <SwatchOutline class="swap-off" />
+        <SwatchSolid class="swap-on" />
+      </GrapeToggleBtn>
+
       <div class="tooltip" data-tip="Подробнее">
         <RouterLink
           :to="{
@@ -65,9 +61,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useUserStore } from "@/stores/user";
 import { useGrapeStore } from "@/stores/grapes";
+import GrapeToggleBtn from "./GrapeToggleBtn.vue";
 import StarOutline from "../Icons/Outline/Star.vue";
 import StarSolid from "../Icons/Solid/Star.vue";
 import Bars from "../Icons/Outline/Bars.vue";
@@ -75,17 +70,7 @@ import SwatchOutline from "../Icons/Outline/Swatch.vue";
 import SwatchSolid from "../Icons/Solid/Swatch.vue";
 import Book from "../Icons/Outline/Book.vue";
 
-const userStore = useUserStore();
 const grapeStore = useGrapeStore();
-const isDisabled = ref(false);
-
-const titles = ref({
-  ABV: "Крепость",
-  body: "Тельность",
-  sweet: "Сладость",
-  acidity: "Кислотность",
-  tannins: "Таннины",
-});
 
 const props = defineProps({
   grape: {
@@ -93,49 +78,4 @@ const props = defineProps({
     required: true,
   },
 });
-
-async function toggleGrapeFavoriteStatus() {
-  const userId = userStore.user?.id;
-  const grapeId = props.grape.id;
-  const isFavorite = favoriteCheckbox.value;
-
-  isDisabled.value = true;
-
-  const favoriteToggleResult = await grapeStore.toggleGrapeFavoriteStatus(
-    userId,
-    grapeId,
-    isFavorite
-  );
-
-  if (!favoriteToggleResult) {
-    favoriteCheckbox.value = !favoriteCheckbox.value;
-  }
-
-  isDisabled.value = false;
-}
-
-async function toggleGrapeConstructorStatus() {
-  const userId = userStore.user?.id;
-  const grapeId = props.grape.id;
-  const isAdded = constructorCheckbox.value;
-
-  isDisabled.value = true;
-
-  const constructorToggleResult = await grapeStore.toggleGrapeConstructorStatus(
-    userId,
-    grapeId,
-    isAdded
-  );
-
-  if (!constructorToggleResult) {
-    constructorCheckbox.value = !constructorCheckbox.value;
-  }
-
-  isDisabled.value = false;
-}
-
-const favoriteCheckbox = ref(props.grape.Favorite.length === 1 ? true : false);
-const constructorCheckbox = ref(
-  props.grape.GrapeConstructor.length === 1 ? true : false
-);
 </script>

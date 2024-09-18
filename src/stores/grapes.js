@@ -8,6 +8,13 @@ export const useGrapeStore = defineStore("grapesStore", () => {
   const loading = ref(false);
   const allCount = ref(0);
   const isAllGrapesLoaded = ref(false);
+  const tasteProfileTitles = ref({
+    ABV: "Крепость",
+    body: "Тельность",
+    sweet: "Сладость",
+    acidity: "Кислотность",
+    tannins: "Таннины",
+  });
 
   async function getAllGrapesCount() {
     try {
@@ -116,6 +123,7 @@ export const useGrapeStore = defineStore("grapesStore", () => {
     allCount,
     isAllGrapesLoaded,
     constructor,
+    tasteProfileTitles,
     getGrapes,
     getAllGrapesCount,
     toggleGrapeFavoriteStatus,
