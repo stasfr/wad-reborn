@@ -18,8 +18,8 @@
 import { defineProps, ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useGrapeStore } from "@/stores/grapes";
-import StarOutline from "../Icons/Outline/Star.vue";
-import StarSolid from "../Icons/Solid/Star.vue";
+import StarOutline from "@/components/Icons/Outline/Star.vue";
+import StarSolid from "@/components/Icons/Solid/Star.vue";
 
 const userStore = useUserStore();
 const grapeStore = useGrapeStore();

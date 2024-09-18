@@ -1,13 +1,13 @@
 import { useUserStore } from "@/stores/user";
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import Dices from "@/views/Dices.vue";
+import Home from "@/views/Home.vue";
+import Dices from "@/views/Dices/Dices.vue";
 import Grapes from "@/views/Grapes/Grapes.vue";
-import GrapePage from "@/views/Grapes/GrapePage.vue";
+import Grape from "@/views/Grapes/Grape.vue";
 import Constructor from "@/views/Grapes/Constructor.vue";
 import NotFound from "@/views/NotFound.vue";
-import Login from "@/views/Login.vue";
-import UserProfile from "@/views/UserProfile.vue";
+import Login from "@/views/User/Login.vue";
+import UserProfile from "@/views/User/UserProfile.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +16,7 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
-      meta: { title: "Home", requiresAuth: false },
+      meta: { title: "Wine&Dices", requiresAuth: false },
     },
     {
       path: "/grapes",
@@ -26,19 +26,19 @@ const router = createRouter({
     },
     {
       path: "/grapes/:grapeId",
-      name: "GrapePage",
-      component: GrapePage,
-      meta: { title: "Grapes", requiresAuth: false },
+      name: "Grape Page",
+      component: Grape,
+      meta: { title: "Grape", requiresAuth: false },
     },
     {
       path: "/grapes/constructor",
-      name: "GrapeConstructor",
+      name: "Grape Constructor",
       component: Constructor,
       meta: { title: "Grape Constructor", requiresAuth: true },
     },
     {
       path: "/dices",
-      name: "dices",
+      name: "Dices",
       component: Dices,
       meta: { title: "Dices", requiresAuth: false },
     },

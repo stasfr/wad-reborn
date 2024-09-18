@@ -18,8 +18,8 @@
 import { defineProps, ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useGrapeStore } from "@/stores/grapes";
-import SwatchOutline from "../Icons/Outline/Swatch.vue";
-import SwatchSolid from "../Icons/Solid/Swatch.vue";
+import SwatchOutline from "@/components/Icons/Outline/Swatch.vue";
+import SwatchSolid from "@/components/Icons/Solid/Swatch.vue";
 
 const userStore = useUserStore();
 const grapeStore = useGrapeStore();

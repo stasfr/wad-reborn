@@ -13,12 +13,12 @@
     </div>
     <!-- btns -->
     <div class="flex flex-col items-start gap-2">
-      <GrapeToggleFavoriteBtn
+      <ToggleFavoriteButton
         :grapeId="grape.id"
         :favorite="grape.Favorite"
         :isFullWidth="true"
       />
-      <GrapeToggleConstructorBtn
+      <ToggleConstructorButton
         :grapeId="grape.id"
         :grapeConstructor="grape.GrapeConstructor"
         :isFullWidth="true"
@@ -70,8 +70,8 @@ import { onMounted, ref } from "vue";
 import { API } from "@/services/controller";
 import { useUserStore } from "@/stores/user";
 import { useGrapeStore } from "@/stores/grapes";
-import GrapeToggleFavoriteBtn from "@/components/Grapes/GrapeToggleFavoriteBtn.vue";
-import GrapeToggleConstructorBtn from "@/components/Grapes/GrapeToggleConstructorBtn.vue";
+import ToggleFavoriteButton from "@/components/Grapes/UI/ToggleFavoriteButton.vue";
+import ToggleConstructorButton from "@/components/Grapes/UI/ToggleConstructorButton.vue";
 
 const route = useRoute();
 const userStore = useUserStore();

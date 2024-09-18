@@ -23,18 +23,18 @@
       </div>
     </div>
     <div class="menu menu-horizontal justify-center join">
-      <GrapeToggleFavoriteBtn
+      <ToggleFavoriteButton
         :grapeId="props.grape.id"
         :favorite="props.grape.Favorite"
       />
 
       <div class="tooltip" data-tip="Заметка">
         <div class="btn">
-          <Book />
+          <BookIcon />
         </div>
       </div>
 
-      <GrapeToggleConstructorBtn
+      <ToggleConstructorButton
         :grapeId="props.grape.id"
         :grapeConstructor="props.grape.GrapeConstructor"
       />
@@ -42,13 +42,13 @@
       <div class="tooltip" data-tip="Подробнее">
         <RouterLink
           :to="{
-            name: 'GrapePage',
+            name: 'Grape Page',
             params: {
               grapeId: grape.id,
             },
           }"
           class="btn"
-          ><Bars
+          ><BarsIcon
         /></RouterLink>
       </div>
     </div>
@@ -57,10 +57,10 @@
 
 <script setup>
 import { useGrapeStore } from "@/stores/grapes";
-import GrapeToggleFavoriteBtn from "./GrapeToggleFavoriteBtn.vue";
-import GrapeToggleConstructorBtn from "./GrapeToggleConstructorBtn.vue";
-import Bars from "../Icons/Outline/Bars.vue";
-import Book from "../Icons/Outline/Book.vue";
+import ToggleFavoriteButton from "@/components/Grapes/UI/ToggleFavoriteButton.vue";
+import ToggleConstructorButton from "@/components/Grapes/UI/ToggleConstructorButton.vue";
+import BookIcon from "@/components/Icons/Outline/Book.vue";
+import BarsIcon from "@/components/Icons/Outline/Bars.vue";
 
 const grapeStore = useGrapeStore();
 

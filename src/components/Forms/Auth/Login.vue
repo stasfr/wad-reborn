@@ -23,8 +23,8 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
-import EmailIcon from "../Icons/Email.vue";
-import PasswordIcon from "../Icons/Password.vue";
+import EmailIcon from "@/components/Icons/Email.vue";
+import PasswordIcon from "@/components/Icons/Password.vue";
 
 const email = ref("stas240600@yandex.ru");
 const password = ref("password");

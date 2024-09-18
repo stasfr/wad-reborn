@@ -2,12 +2,8 @@
   <section>
     <GrapeSearch />
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <GrapeCardLoadingComponent v-if="grapesStore.loading" />
-      <GrapeCardComponent
-        v-else
-        v-for="grape in grapesStore.grapes"
-        :grape="grape"
-      />
+      <GrapeCardLoading v-if="grapesStore.loading" />
+      <GrapeCard v-else v-for="grape in grapesStore.grapes" :grape="grape" />
     </div>
     <!-- Скрытый элемент для infinite scroll -->
     <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
@@ -19,8 +15,8 @@
 import { useGrapeStore } from "@/stores/grapes";
 import { useUserStore } from "@/stores/user";
 import { onMounted, onBeforeUnmount, ref } from "vue";
-import GrapeCardComponent from "@/components/Grapes/GrapeCardComponent.vue";
-import GrapeCardLoadingComponent from "@/components/Grapes/GrapeCardLoadingComponent.vue";
+import GrapeCard from "@/components/Grapes/Card/GrapeCard.vue";
+import GrapeCardLoading from "@/components/Grapes/Card/Loading.vue";
 import GrapeSearch from "@/components/Grapes/GrapeSearch.vue";
 
 const userStore = useUserStore();
