@@ -1,5 +1,5 @@
 <template>
-  <div class="tooltip" :data-tip="getTooltipTitle()">
+  <div :class="{ tooltip: !isFullWidth }" :data-tip="getTooltipTitle()">
     <label class="swap btn">
       <input
         type="checkbox"
@@ -9,6 +9,7 @@
       />
       <StarOutline class="swap-off" />
       <StarSolid class="swap-on" />
+      <span v-if="isFullWidth" class="ml-10">{{ getTooltipTitle() }}</span>
     </label>
   </div>
 </template>
@@ -31,6 +32,10 @@ const props = defineProps({
   grapeId: {
     type: Number,
     required: true,
+  },
+  isFullWidth: {
+    type: Boolean,
+    default: false,
   },
 });
 
