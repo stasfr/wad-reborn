@@ -4,7 +4,12 @@
     <h2 class="text-xl font-bold">{{ grape.name }}</h2>
     <!-- alternative names -->
     <div v-if="grape.alt_names?.length > 0">
-      <span v-for="alt_name in grape.alt_names">{{ alt_name }}; </span>
+      <span
+        class="[&:not(:last-child)]:after:content-[';']"
+        v-for="alt_name in grape.alt_names"
+      >
+        {{ ` ${alt_name}` }}
+      </span>
     </div>
     <!-- btns -->
     <div class="flex flex-col items-start gap-2">

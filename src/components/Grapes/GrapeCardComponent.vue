@@ -2,7 +2,12 @@
   <div class="space-y-4 bg-primary card box-content p-4 w-64">
     <div class="card-title">{{ grape.name }}</div>
     <div class="text-xs">
-      <span v-for="name in grape.alt_names"> {{ name }}; </span>
+      <span
+        class="[&:not(:last-child)]:after:content-[';']"
+        v-for="name in grape.alt_names"
+      >
+        {{ ` ${name}` }}
+      </span>
     </div>
     <div class="flex flex-col">
       <div
