@@ -31,18 +31,15 @@
         class="join-item"
       />
 
-      <!-- <div class="tooltip" data-tip="Заметка">
+      <div class="tooltip" data-tip="Заметка">
         <RouterLink
-          :to="{
-            name: 'Grape Note Page',
-            params: {
-              grapeId: grape.id,
-            },
-          }"
+          to="/grapes/new_note"
           class="btn join-item"
-          ><BookIcon
-        /></RouterLink>
-      </div> -->
+          @click="addGrapeToNotes(props.grape.id, props.grape.name)"
+        >
+          <BookIcon />
+        </RouterLink>
+      </div>
 
       <ToggleConstructorButton
         :grapeId="props.grape.id"
@@ -67,12 +64,14 @@
 
 <script setup>
 import { useGrapeStore } from "@/stores/grapes";
+import { useNoteStore } from "@/stores/note";
 import ToggleFavoriteButton from "@/components/Grapes/UI/ToggleFavoriteButton.vue";
 import ToggleConstructorButton from "@/components/Grapes/UI/ToggleConstructorButton.vue";
 import BookIcon from "@/components/Icons/Outline/Book.vue";
 import BarsIcon from "@/components/Icons/Outline/Bars.vue";
 
 const grapeStore = useGrapeStore();
+const noteStore = useNoteStore();
 
 const props = defineProps({
   grape: {
@@ -80,4 +79,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+function addGrapeToNotes(grapeId, grapeName) {
+  noteStore.addGrapeToNotes(grapeId, grapeName);
+}
 </script>

@@ -36,9 +36,23 @@ async function removeGrapeFromGrapeConstructor(userId, grapeId) {
   return await query;
 }
 
+async function saveGrapeNote(userId, grapeId, title, text) {
+  let query = supabase.from("GrapeNote").insert([
+    {
+      user_id: userId,
+      grape_id: grapeId,
+      title: title,
+      text: text,
+    },
+  ]);
+
+  return await query;
+}
+
 export default {
   addGrapeToFavorite,
   removeGrapeFromFavorite,
   addGrapeToGrapeConstructor,
   removeGrapeFromGrapeConstructor,
+  saveGrapeNote,
 };
