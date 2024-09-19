@@ -1,6 +1,6 @@
 <template>
   <div :class="{ tooltip: !isFullWidth }" :data-tip="getTooltipTitle()">
-    <label class="swap btn">
+    <label class="swap btn join-item">
       <input
         type="checkbox"
         v-model="checkbox"

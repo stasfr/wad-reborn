@@ -3,17 +3,33 @@ import { ref } from "vue";
 
 export const useThemeStore = defineStore("themeStore", () => {
   const theme = ref(getThemeFromLocalStorage());
+  const themes = ref([
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "retro",
+    "valentine",
+    "forest",
+    "lofi",
+    "pastel",
+    "wireframe",
+    "black",
+    "autumn",
+    "business",
+    "coffee",
+    "nord",
+  ]);
 
   function getThemeFromLocalStorage() {
-    const themePreference = localStorage.getItem("theme_preference");
+    const themePreference = localStorage.getItem("theme");
 
-    return themePreference ? JSON.parse(themePreference) : "dark";
+    return themePreference ? JSON.parse(themePreference) : "pastel";
   }
 
   function changeTheme(newTheme) {
     theme.value = newTheme;
-    localStorage.setItem("theme_preference", JSON.stringify(theme.value));
+    localStorage.setItem("theme", JSON.stringify(theme.value));
   }
 
-  return { theme, changeTheme };
+  return { theme, themes, changeTheme };
 });

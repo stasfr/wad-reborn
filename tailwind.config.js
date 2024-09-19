@@ -17,6 +17,6 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: true,
-    darkTheme: "business",
+    darkMode: "cupcake",
   },
 };

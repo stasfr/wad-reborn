@@ -1,5 +1,7 @@
 <template>
-  <div class="space-y-4 bg-primary card box-content p-4 w-64">
+  <div
+    class="space-y-4 bg-primary text-primary-content card box-content p-4 w-64"
+  >
     <div class="card-title">{{ grape.name }}</div>
     <div class="text-xs">
       <span
@@ -26,10 +28,11 @@
       <ToggleFavoriteButton
         :grapeId="props.grape.id"
         :favorite="props.grape.Favorite"
+        class="join-item"
       />
 
       <div class="tooltip" data-tip="Заметка">
-        <div class="btn">
+        <div class="btn join-item">
           <BookIcon />
         </div>
       </div>
@@ -47,7 +50,7 @@
               grapeId: grape.id,
             },
           }"
-          class="btn"
+          class="btn join-item"
           ><BarsIcon
         /></RouterLink>
       </div>
