@@ -32,9 +32,16 @@
       />
 
       <div class="tooltip" data-tip="Заметка">
-        <div class="btn join-item">
-          <BookIcon />
-        </div>
+        <RouterLink
+          :to="{
+            name: 'Grape Note Page',
+            params: {
+              grapeId: grape.id,
+            },
+          }"
+          class="btn join-item"
+          ><BookIcon
+        /></RouterLink>
       </div>
 
       <ToggleConstructorButton
