@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useGrapeStore } from "@/stores/grapes";
 import StarOutline from "@/components/Icons/Outline/Star.vue";
