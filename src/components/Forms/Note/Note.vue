@@ -1,10 +1,17 @@
 <template>
-  <div>note taking form to grape with ID: {{ grapeId }}</div>
+  <form action="">
+    <input
+      type="text"
+      placeholder="Заголовок"
+      class="input input-bordered w-full max-w-xs"
+      v-model="title"
+    />
+    <p>{{ title }}</p>
+  </form>
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-const route = useRoute();
+import { ref } from "vue";
 
-const grapeId = route.params.grapeId;
+const title = ref();
 </script>

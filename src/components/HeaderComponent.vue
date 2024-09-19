@@ -17,6 +17,8 @@
         >
           <li><RouterLink to="/grapes">Виноград</RouterLink></li>
           <li><RouterLink to="/grapes/constructor">Конструктор</RouterLink></li>
+          <li><RouterLink to="/grapes/notes">Заметки</RouterLink></li>
+          <div class="divider divider-accent"></div>
           <li><RouterLink to="/dices">Кубы</RouterLink></li>
           <div class="divider divider-accent"></div>
           <li v-if="!userStore.user">

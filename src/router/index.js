@@ -5,7 +5,8 @@ import Dices from "@/views/Dices/Dices.vue";
 import Grapes from "@/views/Grapes/Grapes.vue";
 import Grape from "@/views/Grapes/Grape.vue";
 import Constructor from "@/views/Grapes/Constructor.vue";
-import Note from "@/views/Grapes/Note.vue";
+import Note from "@/views/Grapes/Notes/Note.vue";
+import Notes from "@/views/Grapes/Notes/Notes.vue";
 import NotFound from "@/views/NotFound.vue";
 import Login from "@/views/User/Login.vue";
 import Register from "@/views/User/Register.vue";
@@ -33,7 +34,13 @@ const router = createRouter({
       meta: { title: "Grape", requiresAuth: false },
     },
     {
-      path: "/grapes/:grapeId/new_note",
+      path: "/grapes/notes",
+      name: "Grapes Notes Page",
+      component: Notes,
+      meta: { title: "Grape Notes", requiresAuth: true },
+    },
+    {
+      path: "/grapes/new_note",
       name: "Grape Note Page",
       component: Note,
       meta: { title: "New Grape Note", requiresAuth: true },
