@@ -74,11 +74,13 @@ export const useGrapeStore = defineStore("grapesStore", () => {
         });
       } else if (isFavorite === false) {
         data = await API.User.addGrapeToFavorite(userId, grapeId);
-        grapes.value.forEach((element) => {
-          if (element.id === grapeId) {
-            element["Favorite"] = [Date.now()];
-          }
-        });
+        if (!data.error) {
+          grapes.value.forEach((element) => {
+            if (element.id === grapeId) {
+              element["Favorite"] = [Date.now()];
+            }
+          });
+        }
       }
 
       if (data.error) throw Error(data.error);
@@ -102,11 +104,13 @@ export const useGrapeStore = defineStore("grapesStore", () => {
         });
       } else if (isAdded === false) {
         data = await API.User.addGrapeToGrapeConstructor(userId, grapeId);
-        grapes.value.forEach((element) => {
-          if (element.id === grapeId) {
-            element["GrapeConstructor"] = [Date.now()];
-          }
-        });
+        if (!data.error) {
+          grapes.value.forEach((element) => {
+            if (element.id === grapeId) {
+              element["GrapeConstructor"] = [Date.now()];
+            }
+          });
+        }
       }
 
       if (data.error) throw Error(data.error);
