@@ -16,15 +16,9 @@ export const useNoteStore = defineStore("noteStore", () => {
   }
 
   async function saveGrapeNote(userId, grapeId, title, text) {
-    try {
-      // TODO: добавить валидацию, что все не нулевое
-      const data = await API.User.saveGrapeNote(userId, grapeId, title, text);
-      if (data.error) throw Error(data.error);
-
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    // TODO: добавить валидацию, что все не нулевое
+    const data = await API.User.saveGrapeNote(userId, grapeId, title, text);
+    if (data.error) return;
   }
 
   return { note, addGrapeToNotes, saveGrapeNote };

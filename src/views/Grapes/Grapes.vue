@@ -29,7 +29,7 @@ onMounted(async () => {
     const userSession = await userStore.getSession();
     let userId = null;
 
-    if (userSession.data.session) {
+    if (userSession) {
       userId = userStore.user.id;
     }
 

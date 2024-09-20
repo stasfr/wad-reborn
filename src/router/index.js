@@ -86,8 +86,8 @@ const router = createRouter({
 
 async function redirectToLogin(next) {
   const userStore = useUserStore();
-  const localUser = await userStore.getSession();
-  if (localUser.data.session === null) {
+  const userSession = await userStore.getSession();
+  if (userSession === null) {
     next("/login");
   } else {
     next();
@@ -96,8 +96,8 @@ async function redirectToLogin(next) {
 
 async function redirectToProfile(next) {
   const userStore = useUserStore();
-  const localUser = await userStore.getSession();
-  if (localUser.data.session !== null) {
+  const userSession = await userStore.getSession();
+  if (userSession !== null) {
     next("/profile");
   } else {
     next();

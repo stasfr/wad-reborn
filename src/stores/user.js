@@ -6,78 +6,58 @@ export const useUserStore = defineStore("userStore", () => {
   const user = ref();
 
   async function signUp({ email, password }) {
-    try {
-      const data = await API.Auth.signUp({ email, password });
-      if (data.error) throw Error(data.error);
-    } catch (error) {
-      console.log(error);
-    }
+    const { data, error } = await API.Auth.signUp({ email, password });
+    if (error) return;
   }
 
   async function signInWithPassword({ email, password }) {
-    try {
-      const data = await API.Auth.signInWithPassword({ email, password });
-      if (data.error) throw Error(data.error);
-      user.value = data.data;
-    } catch (error) {
-      console.log(error);
-    }
+    const { data, error } = await API.Auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) return;
   }
 
   async function getSession() {
-    try {
-      const data = await API.Auth.getSession();
-      if (data.data.session) {
-        user.value = data.data.session.user;
-      }
+    const { data, error } = await API.Auth.getSession();
+    const session = data.session;
 
-      if (data.error) throw Error(data.error);
-      return data;
-    } catch (error) {
-      console.log(error);
+    if (session) {
+      user.value = session.user;
     }
+
+    if (error) return;
+    return session;
   }
 
   async function signOut() {
-    try {
-      const data = await API.Auth.signOut();
-      user.value = {};
+    const { data, error } = await API.Auth.signOut();
+    user.value = {};
 
-      if (data.error) throw Error(data.error);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
+    if (error) return;
+    return data;
   }
 
   async function getUserId() {
-    try {
-      const data = await API.Auth.getSession();
-      if (data.data.session) {
-        user.value = data.data.session.user;
-      }
-
-      if (data.error) throw Error(data.error);
-      return data.data.session.user.id;
-    } catch (error) {
-      console.log(error);
+    const { data, error } = await API.Auth.getSession();
+    const session = data.session;
+    if (session) {
+      user.value = session.user;
+      return session.user.id;
     }
+
+    if (error) return;
   }
 
   async function getUser() {
-    try {
-      const data = await API.Auth.getSession();
-      if (data.data.session) {
-        user.value = data.data.session.user;
-        return data.data.session.user;
-      } else {
-      }
-
-      if (data.error) throw Error(data.error);
-      return null;
-    } catch (error) {
-      console.log(error);
+    const { data, error } = await API.Auth.getSession();
+    const session = data.session;
+    if (session) {
+      user.value = session.user;
+      return session.user;
     }
+
+    if (error) return;
   }
 
   return {
