@@ -1,18 +1,19 @@
+<script setup lang="ts">
+import Header from "@/components/Header.vue";
+import useTheme from "@/composables/useTheme";
+
+const useThemeStore = useTheme();
+</script>
+
 <template>
   <div
     class="min-h-screen overflow-hidden flex flex-col transition-colors duration-300"
-    :data-theme="themeStore.theme"
+    :class="useThemeStore.getTheme.value"
   >
-    <HeaderComponent />
+    <Header />
     <main class="flex-auto my-24 max-w-screen-xl mx-auto px-4">
+      <button @click="useThemeStore.changeTheme">click</button>
       <slot />
     </main>
   </div>
 </template>
-
-<script setup>
-import HeaderComponent from "@/components/HeaderComponent.vue";
-import { useThemeStore } from "@/stores/theme";
-
-const themeStore = useThemeStore();
-</script>
