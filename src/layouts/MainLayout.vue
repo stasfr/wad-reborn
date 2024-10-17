@@ -12,7 +12,6 @@ const useThemeStore = useTheme();
   >
     <Header />
     <main class="flex-auto my-24 max-w-screen-xl mx-auto px-4">
-      <button @click="useThemeStore.changeTheme">click</button>
       <slot />
     </main>
   </div>

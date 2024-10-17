@@ -1,15 +1,9 @@
 import { ref, computed } from "vue";
 
 export default function useTheme() {
-  const theme = ref<string>(getThemePreference());
+  const theme = ref<string>(getThemeFromLocalStorage() || getThemePreference());
 
   function getThemePreference() {
-    const themePreference = getThemeFromLocalStorage();
-
-    if (themePreference) {
-      return themePreference;
-    }
-
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
