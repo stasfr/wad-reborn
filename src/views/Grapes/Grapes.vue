@@ -58,7 +58,12 @@ function handleIntersect(entries) {
   <section>
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <GrapeCardLoading v-if="grapesStore.loading" />
-      <GrapeCard v-else v-for="grape in grapesStore.grapes" :grape="grape" />
+      <GrapeCard
+        v-else
+        v-for="grape in grapesStore.grapes"
+        :grape="grape"
+        :key="grape.id"
+      />
     </div>
     <!-- Скрытый элемент для infinite scroll -->
     <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->

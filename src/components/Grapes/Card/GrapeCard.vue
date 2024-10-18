@@ -1,56 +1,33 @@
 <script setup lang="ts">
-import useGrape from '@/composables/useGrape'
-import BookIcon from '@/components/Icons/Outline/Book.vue'
-import BarsIcon from '@/components/Icons/Outline/Bars.vue'
+import { Icon } from '@iconify/vue'
+import { type Grape } from '@/types/Grape'
 
-const grapeStore = useGrape()
-
-const props = defineProps({
-  grape: {
-    type: Object,
-    required: true,
-  },
-})
-
-function addGrapeToNotes(grapeId, grapeName) {
-  console.log('add to note', grapeId, grapeName)
+interface Props {
+  grape: Grape
 }
+
+const props = defineProps<Props>()
 </script>
 
 <template>
   <div
     class="space-y-4 bg-primary text-primary-content card box-content p-4 w-64"
   >
-    <div class="card-title">{{ grape.name }}</div>
+    <div class="card-title">{{ props.grape.name }}</div>
     <div class="text-xs">
+      <!-- TODO: изменить index на нормальный key -->
       <span
         class="[&:not(:last-child)]:after:content-[';']"
-        v-for="name in grape.alt_names"
+        v-for="(name, index) in props.grape.alt_names"
+        :key="index"
       >
         {{ ` ${name}` }}
       </span>
     </div>
-    <div class="flex flex-col">
-      <div
-        v-for="(value, key) in grape.taste_profile"
-        class="flex items-center gap-2"
-      >
-        <p class="flex-[45%]">{{ grapeStore.tasteProfileTitles[key] }}</p>
-        <progress
-          class="progress flex-[55%]"
-          :value="value * 10"
-          max="100"
-        ></progress>
-      </div>
-    </div>
     <div class="menu menu-horizontal justify-center join">
       <div class="tooltip" data-tip="Заметка">
-        <RouterLink
-          to="/grapes/new_note"
-          class="btn join-item"
-          @click="addGrapeToNotes(props.grape.id, props.grape.name)"
-        >
-          <BookIcon />
+        <RouterLink to="/grapes/new_note" class="btn join-item">
+          <Icon icon="iconoir:book" class="size-5" />
         </RouterLink>
       </div>
 
@@ -59,12 +36,13 @@ function addGrapeToNotes(grapeId, grapeName) {
           :to="{
             name: 'Grape Page',
             params: {
-              grapeId: grape.id,
+              grapeId: props.grape.id,
             },
           }"
           class="btn join-item"
-          ><BarsIcon
-        /></RouterLink>
+        >
+          <Icon icon="heroicons:bars-3-20-solid" class="size-5" />
+        </RouterLink>
       </div>
     </div>
   </div>
