@@ -15,14 +15,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useUserStore } from "@/stores/user";
-import { useGrapeStore } from "@/stores/grapes";
-import SwatchOutline from "@/components/Icons/Outline/Swatch.vue";
-import SwatchSolid from "@/components/Icons/Solid/Swatch.vue";
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useGrapeStore } from '@/stores/grapes'
+import SwatchOutline from '@/components/Icons/Outline/Swatch.vue'
+import SwatchSolid from '@/components/Icons/Solid/Swatch.vue'
 
-const userStore = useUserStore();
-const grapeStore = useGrapeStore();
+const userStore = useUserStore()
+const grapeStore = useGrapeStore()
 
 const props = defineProps({
   grapeConstructor: {
@@ -37,31 +37,31 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const isDisabled = ref(false);
-const checkbox = ref(props.grapeConstructor?.length === 1 ? true : false);
+const isDisabled = ref(false)
+const checkbox = ref(props.grapeConstructor?.length === 1 ? true : false)
 
 async function toggleGrapeConstructorStatus() {
-  const isAdded = checkbox.value;
-  const userId = ref(await userStore.getUserId());
+  const isAdded = checkbox.value
+  const userId = ref(await userStore.getUserId())
 
-  isDisabled.value = true;
+  isDisabled.value = true
 
   const constructorToggleResult = await grapeStore.toggleGrapeConstructorStatus(
     userId.value,
     props.grapeId,
-    isAdded
-  );
+    isAdded,
+  )
 
   if (!constructorToggleResult) {
-    checkbox.value = !checkbox.value;
+    checkbox.value = !checkbox.value
   }
 
-  isDisabled.value = false;
+  isDisabled.value = false
 }
 
 function getTooltipTitle() {
-  return checkbox.value ? "Удалить из конструктора" : "В конструктор";
+  return checkbox.value ? 'Удалить из конструктора' : 'В конструктор'
 }
 </script>

@@ -26,30 +26,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useUserStore } from "@/stores/user";
-import { useRouter } from "vue-router";
-import EmailIcon from "@/components/Icons/Email.vue";
-import PasswordIcon from "@/components/Icons/Password.vue";
-import AuthInput from "@/components/Forms/Auth/AuthInput.vue";
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import EmailIcon from '@/components/Icons/Email.vue'
+import PasswordIcon from '@/components/Icons/Password.vue'
+import AuthInput from '@/components/Forms/Auth/AuthInput.vue'
 
-const email = ref("stas240600@yandex.ru");
-const password = ref("password");
-const passwordRepeat = ref("passwordd");
-const router = useRouter();
+const email = ref('stas240600@yandex.ru')
+const password = ref('password')
+const passwordRepeat = ref('passwordd')
+const router = useRouter()
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 async function signUp() {
   if (password.value === passwordRepeat.value) {
     await userStore.signUp({
       email: email.value,
       password: password.value,
-    });
-    router.push({ path: "/login" });
+    })
+    router.push({ path: '/login' })
   } else {
     //TODO: throw modal with error
-    console.log("Пароли не совпадают");
+    console.log('Пароли не совпадают')
   }
 }
 </script>

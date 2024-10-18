@@ -3,12 +3,12 @@
 </template>
 
 <script setup>
-import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
+import { useUserStore } from '@/stores/user'
+import { onMounted } from 'vue'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 onMounted(async () => {
-  await userStore.getSession();
-});
+  await userStore.getSession()
+})
 </script>

@@ -15,14 +15,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useUserStore } from "@/stores/user";
-import { useGrapeStore } from "@/stores/grapes";
-import StarOutline from "@/components/Icons/Outline/Star.vue";
-import StarSolid from "@/components/Icons/Solid/Star.vue";
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useGrapeStore } from '@/stores/grapes'
+import StarOutline from '@/components/Icons/Outline/Star.vue'
+import StarSolid from '@/components/Icons/Solid/Star.vue'
 
-const userStore = useUserStore();
-const grapeStore = useGrapeStore();
+const userStore = useUserStore()
+const grapeStore = useGrapeStore()
 
 const props = defineProps({
   favorite: {
@@ -37,31 +37,31 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const isDisabled = ref(false);
-const checkbox = ref(props.favorite?.length === 1 ? true : false);
+const isDisabled = ref(false)
+const checkbox = ref(props.favorite?.length === 1 ? true : false)
 
 async function toggleGrapeFavoriteStatus() {
-  const isFavorite = checkbox.value;
-  const userId = ref(await userStore.getUserId());
+  const isFavorite = checkbox.value
+  const userId = ref(await userStore.getUserId())
 
-  isDisabled.value = true;
+  isDisabled.value = true
 
   const favoriteToggleResult = await grapeStore.toggleGrapeFavoriteStatus(
     userId.value,
     props.grapeId,
-    isFavorite
-  );
+    isFavorite,
+  )
 
   if (!favoriteToggleResult) {
-    checkbox.value = !checkbox.value;
+    checkbox.value = !checkbox.value
   }
 
-  isDisabled.value = false;
+  isDisabled.value = false
 }
 
 function getTooltipTitle() {
-  return checkbox.value ? "Удалить из избранного" : "В избранное";
+  return checkbox.value ? 'Удалить из избранного' : 'В избранное'
 }
 </script>

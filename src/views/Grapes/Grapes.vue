@@ -12,58 +12,58 @@
 </template>
 
 <script setup>
-import { useGrapeStore } from "@/stores/grapes";
-import { useUserStore } from "@/stores/user";
-import { onMounted, onBeforeUnmount, ref } from "vue";
-import GrapeCard from "@/components/Grapes/Card/GrapeCard.vue";
-import GrapeCardLoading from "@/components/Grapes/Card/Loading.vue";
-import GrapeSearch from "@/components/Grapes/GrapeSearch.vue";
+import { useGrapeStore } from '@/stores/grapes'
+import { useUserStore } from '@/stores/user'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
+import GrapeCard from '@/components/Grapes/Card/GrapeCard.vue'
+import GrapeCardLoading from '@/components/Grapes/Card/Loading.vue'
+import GrapeSearch from '@/components/Grapes/GrapeSearch.vue'
 
-const userStore = useUserStore();
-const grapesStore = useGrapeStore();
-const observer = ref(null); // Ссылка на элемент для наблюдения
-const observerInstance = ref(null); // Ссылка на экземпляр IntersectionObserver
+const userStore = useUserStore()
+const grapesStore = useGrapeStore()
+const observer = ref(null) // Ссылка на элемент для наблюдения
+const observerInstance = ref(null) // Ссылка на экземпляр IntersectionObserver
 
 onMounted(async () => {
   if (grapesStore.grapes.length === 0) {
-    const userSession = await userStore.getSession();
-    let userId = null;
+    const userSession = await userStore.getSession()
+    let userId = null
 
     if (userSession) {
-      userId = userStore.user.id;
+      userId = userStore.user.id
     }
 
-    await grapesStore.getGrapes(userId);
-    await grapesStore.getAllGrapesCount();
+    await grapesStore.getGrapes(userId)
+    await grapesStore.getAllGrapesCount()
   }
 
   // Инициализация IntersectionObserver
   observerInstance.value = new IntersectionObserver(handleIntersect, {
     root: null,
-    rootMargin: "0px",
+    rootMargin: '0px',
     threshold: 0.1,
-  });
+  })
 
   if (observer.value) {
-    observerInstance.value.observe(observer.value);
+    observerInstance.value.observe(observer.value)
   }
-});
+})
 
 onBeforeUnmount(() => {
   // Отмена наблюдения при уничтожении компонента
   if (observerInstance.value && observer.value) {
-    observerInstance.value.unobserve(observer.value);
+    observerInstance.value.unobserve(observer.value)
   }
-});
+})
 
 function handleIntersect(entries) {
-  const entry = entries[0];
+  const entry = entries[0]
   if (
     entry.isIntersecting &&
     !grapesStore.loading &&
     !grapesStore.isAllGrapesLoaded
   ) {
-    grapesStore.getGrapes();
+    grapesStore.getGrapes()
   }
 }
 </script>

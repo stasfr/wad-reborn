@@ -16,35 +16,35 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useNoteStore } from "@/stores/note";
-import { useUserStore } from "@/stores/user";
+import { ref } from 'vue'
+import { useNoteStore } from '@/stores/note'
+import { useUserStore } from '@/stores/user'
 
 const props = defineProps({
   grapeId: {
     type: Number,
     required: true,
   },
-});
+})
 
-const noteStore = useNoteStore();
-const userStore = useUserStore();
+const noteStore = useNoteStore()
+const userStore = useUserStore()
 
-const title = ref();
-const text = ref();
+const title = ref()
+const text = ref()
 
 // TODO: добавить валидацию, что все не нулевое
 async function saveGrapeNote() {
-  const userId = await userStore.getUserId();
-  const grapeId = props.grapeId;
+  const userId = await userStore.getUserId()
+  const grapeId = props.grapeId
 
   const data = await noteStore.saveGrapeNote(
     userId,
     grapeId,
     title.value,
-    text.value
-  );
+    text.value,
+  )
 
-  console.log(data);
+  console.log(data)
 }
 </script>

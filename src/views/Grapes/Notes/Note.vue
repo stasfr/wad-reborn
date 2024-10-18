@@ -9,18 +9,18 @@
 </template>
 
 <script setup>
-import Note from "@/components/Forms/Note/Note.vue";
-import { useNoteStore } from "@/stores/note";
+import Note from '@/components/Forms/Note/Note.vue'
+import { useNoteStore } from '@/stores/note'
 
-const noteStore = useNoteStore();
+const noteStore = useNoteStore()
 
 function getTitle() {
   if (noteStore.note.grapeName.length === 0) {
-    return "";
+    return ''
   } else if (noteStore.note.grapeName.length === 1) {
-    return "Заметка по винограду: ";
+    return 'Заметка по винограду: '
   } else {
-    return "Заметка по виноградам: ";
+    return 'Заметка по виноградам: '
   }
 }
 </script>

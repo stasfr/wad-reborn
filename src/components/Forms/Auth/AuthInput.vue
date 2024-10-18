@@ -21,7 +21,7 @@ const props = defineProps({
     required: true,
   },
   icon: { type: Object },
-});
+})
 
-const model = defineModel();
+const model = defineModel()
 </script>

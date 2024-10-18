@@ -1,51 +1,51 @@
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 
 export default function useTheme() {
-  const theme = ref<string>(getThemeFromLocalStorage() || getThemePreference());
+  const theme = ref<string>(getThemeFromLocalStorage() || getThemePreference())
 
   function getThemePreference() {
     if (
       window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia('(prefers-color-scheme: dark)').matches
     ) {
-      return "dark";
+      return 'dark'
     }
 
-    return "light";
+    return 'light'
   }
 
   function setThemeToLocalStorage(theme: string) {
-    localStorage.setItem("theme", JSON.stringify(theme));
+    localStorage.setItem('theme', JSON.stringify(theme))
   }
 
   function getThemeFromLocalStorage() {
-    const themePreference = localStorage.getItem("theme");
-    return themePreference ? JSON.parse(themePreference) : "";
+    const themePreference = localStorage.getItem('theme')
+    return themePreference ? JSON.parse(themePreference) : ''
   }
 
   function changeTheme() {
-    removeThemeFromDOM();
-    theme.value = theme.value === "light" ? "dark" : "light";
-    applyThemeToDOM();
-    setThemeToLocalStorage(theme.value);
+    removeThemeFromDOM()
+    theme.value = theme.value === 'light' ? 'dark' : 'light'
+    applyThemeToDOM()
+    setThemeToLocalStorage(theme.value)
   }
 
   function applyThemeToDOM() {
-    document.documentElement.classList.add(theme.value);
+    document.documentElement.classList.add(theme.value)
   }
 
   function removeThemeFromDOM() {
-    document.documentElement.classList.remove(theme.value);
+    document.documentElement.classList.remove(theme.value)
   }
 
   const getTheme = computed(() => {
-    return theme.value;
-  });
+    return theme.value
+  })
 
-  applyThemeToDOM();
+  applyThemeToDOM()
 
   return {
     getTheme,
     changeTheme,
-  };
+  }
 }

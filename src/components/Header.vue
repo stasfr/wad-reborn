@@ -1,114 +1,114 @@
 <script setup lang="ts">
-import { useUserStore } from "@/stores/user";
-import { onMounted, ref, watch } from "vue";
-import Menubar from "primevue/menubar";
-import ToggleSwitch from "primevue/toggleswitch";
-import Avatar from "primevue/avatar";
-import useTheme from "@/composables/useTheme";
-import Menu from "primevue/menu";
-import { Icon } from "@iconify/vue";
-import { useRouter } from "vue-router";
+import { useUserStore } from '@/stores/user'
+import { onMounted, ref, watch } from 'vue'
+import Menubar from 'primevue/menubar'
+import ToggleSwitch from 'primevue/toggleswitch'
+import Avatar from 'primevue/avatar'
+import useTheme from '@/composables/useTheme'
+import Menu from 'primevue/menu'
+import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
 
-const user = ref({});
-const userStore = useUserStore();
-const useThemeStore = useTheme();
-const router = useRouter();
+const user = ref({})
+const userStore = useUserStore()
+const useThemeStore = useTheme()
+const router = useRouter()
 
 const themeType = ref<boolean>(
-  useThemeStore.getTheme.value === "dark" ? true : false
-);
+  useThemeStore.getTheme.value === 'dark' ? true : false,
+)
 
-const menu = ref();
+const menu = ref()
 function toggleMenu(event: any) {
-  menu.value.toggle(event);
+  menu.value.toggle(event)
 }
 
 onMounted(async () => {
-  user.value = await userStore.getUser();
-});
+  user.value = await userStore.getUser()
+})
 
 watch(themeType, () => {
-  useThemeStore.changeTheme();
-});
+  useThemeStore.changeTheme()
+})
 
 async function signOut() {
-  const signOut = await userStore.signOut();
-  window.location.reload();
+  const signOut = await userStore.signOut()
+  window.location.reload()
 }
 
 // TODO: сделать кастомный RouterLink, чтобы to мог быть undefined
 const headerMenuItems = ref([
   {
-    label: "Главная",
-    icon: "prime:home",
-    command: () => router.push("/"),
+    label: 'Главная',
+    icon: 'prime:home',
+    command: () => router.push('/'),
   },
   {
-    label: "Wine",
-    icon: "fluent-emoji-high-contrast:grapes",
+    label: 'Wine',
+    icon: 'fluent-emoji-high-contrast:grapes',
     items: [
       {
-        label: "Винограды",
-        icon: "fluent-emoji-high-contrast:grapes",
-        command: () => router.push("/grapes"),
+        label: 'Винограды',
+        icon: 'fluent-emoji-high-contrast:grapes',
+        command: () => router.push('/grapes'),
       },
       {
-        label: "Конструктор",
-        icon: "tabler:hammer",
-        command: () => router.push("/grapes/constructor"),
+        label: 'Конструктор',
+        icon: 'tabler:hammer',
+        command: () => router.push('/grapes/constructor'),
       },
       {
-        label: "Заметки",
-        icon: "iconoir:notes",
-        command: () => router.push("/grapes/notes"),
+        label: 'Заметки',
+        icon: 'iconoir:notes',
+        command: () => router.push('/grapes/notes'),
       },
     ],
   },
   {
-    label: "Dices",
-    icon: "iconoir:dice-six",
+    label: 'Dices',
+    icon: 'iconoir:dice-six',
     items: [
       {
-        label: "Кубы",
-        icon: "iconoir:dice-six",
-        command: () => router.push("/dices"),
+        label: 'Кубы',
+        icon: 'iconoir:dice-six',
+        command: () => router.push('/dices'),
       },
     ],
   },
-]);
+])
 
 const profileMenuItems = ref([
   {
-    label: "Профиль",
+    label: 'Профиль',
     items: [
       {
-        label: "Аккаунт",
-        icon: "prime:user",
-        command: () => router.push("/profile"),
+        label: 'Аккаунт',
+        icon: 'prime:user',
+        command: () => router.push('/profile'),
       },
       {
-        label: "Выйти",
-        icon: "prime:sign-out",
+        label: 'Выйти',
+        icon: 'prime:sign-out',
         command: () => signOut(),
       },
     ],
   },
   {
-    label: "Вход",
+    label: 'Вход',
     items: [
       {
-        label: "Войти",
-        icon: "prime:sign-in",
-        command: () => router.push("/login"),
+        label: 'Войти',
+        icon: 'prime:sign-in',
+        command: () => router.push('/login'),
       },
       {
-        label: "Регистрация",
-        icon: "prime:user-plus",
-        command: () => router.push("/register"),
+        label: 'Регистрация',
+        icon: 'prime:user-plus',
+        command: () => router.push('/register'),
       },
     ],
   },
-]);
+])
 </script>
 
 <template>

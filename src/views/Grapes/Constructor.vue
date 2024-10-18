@@ -3,12 +3,12 @@
 </template>
 
 <script setup>
-import { useGrapeStore } from "@/stores/grapes";
-import { onMounted } from "vue";
+import { useGrapeStore } from '@/stores/grapes'
+import { onMounted } from 'vue'
 
-const grapeStore = useGrapeStore();
+const grapeStore = useGrapeStore()
 
 onMounted(async () => {
-  await grapeStore.getConstructor();
-});
+  await grapeStore.getConstructor()
+})
 </script>

@@ -10,19 +10,19 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useGrapeStore } from "@/stores/grapes";
+import { ref, watch } from 'vue'
+import { useGrapeStore } from '@/stores/grapes'
 
-const search = ref("");
+const search = ref('')
 
-const grapesStore = useGrapeStore();
+const grapesStore = useGrapeStore()
 
 watch(search, async () => {
-  if (search === "") {
+  if (search.value === '') {
     // await grapesStore.getGrapes();
   } else {
     // await grapesStore.getGrapesByName(search);
   }
-  console.log(search.value);
-});
+  console.log(search.value)
+})
 </script>
