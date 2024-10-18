@@ -1,4 +1,4 @@
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import {
   createRouter,
   createWebHistory,
@@ -89,7 +89,7 @@ const router = createRouter({
 })
 
 async function redirectToLogin(next: NavigationGuardNext) {
-  const userStore = useUserStore()
+  const userStore = useUser()
   const userSession = await userStore.getSession()
   if (userSession === null) {
     next('/login')
@@ -99,7 +99,7 @@ async function redirectToLogin(next: NavigationGuardNext) {
 }
 
 async function redirectToProfile(next: NavigationGuardNext) {
-  const userStore = useUserStore()
+  const userStore = useUser()
   const userSession = await userStore.getSession()
   if (userSession !== null) {
     next('/profile')

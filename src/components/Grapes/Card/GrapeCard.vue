@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { useGrapeStore } from '@/stores/grapes'
-import { useNoteStore } from '@/stores/note'
 import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
 import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
 import BookIcon from '@/components/Icons/Outline/Book.vue'
 import BarsIcon from '@/components/Icons/Outline/Bars.vue'
 
 const grapeStore = useGrapeStore()
-const noteStore = useNoteStore()
 
 const props = defineProps({
   grape: {
@@ -17,7 +15,7 @@ const props = defineProps({
 })
 
 function addGrapeToNotes(grapeId, grapeName) {
-  noteStore.addGrapeToNotes(grapeId, grapeName)
+  console.log('add to note', grapeId, grapeName)
 }
 </script>
 

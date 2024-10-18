@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import EmailIcon from '@/components/Icons/Email.vue'
 import PasswordIcon from '@/components/Icons/Password.vue'
 import AuthInput from '@/components/Forms/Auth/AuthInput.vue'
@@ -8,7 +8,7 @@ import AuthInput from '@/components/Forms/Auth/AuthInput.vue'
 const email = ref('stas240600@yandex.ru')
 const password = ref('password')
 
-const userStore = useUserStore()
+const userStore = useUser()
 
 async function signInWithPassword() {
   await userStore.signInWithPassword({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { useRouter } from 'vue-router'
 import EmailIcon from '@/components/Icons/Email.vue'
 import PasswordIcon from '@/components/Icons/Password.vue'
@@ -11,7 +11,7 @@ const password = ref('password')
 const passwordRepeat = ref('passwordd')
 const router = useRouter()
 
-const userStore = useUserStore()
+const userStore = useUser()
 
 async function signUp() {
   if (password.value === passwordRepeat.value) {

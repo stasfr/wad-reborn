@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { useGrapeStore } from '@/stores/grapes'
 import SwatchOutline from '@/components/Icons/Outline/Swatch.vue'
 import SwatchSolid from '@/components/Icons/Solid/Swatch.vue'
 
-const userStore = useUserStore()
+const userStore = useUser()
 const grapeStore = useGrapeStore()
 
 const props = defineProps({

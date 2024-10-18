@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { onMounted } from 'vue'
 
-const userStore = useUserStore()
+const userStore = useUser()
 
 onMounted(async () => {
   await userStore.getSession()

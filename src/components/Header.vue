@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { onMounted, ref, watch } from 'vue'
 import Menubar from 'primevue/menubar'
 import ToggleSwitch from 'primevue/toggleswitch'
@@ -10,7 +10,7 @@ import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 
 const user = ref({})
-const userStore = useUserStore()
+const userStore = useUser()
 const useThemeStore = useTheme()
 const router = useRouter()
 
@@ -19,7 +19,7 @@ const themeType = ref<boolean>(
 )
 
 const menu = ref()
-function toggleMenu(event: any) {
+function toggleMenu(event: Event) {
   menu.value.toggle(event)
 }
 
@@ -32,7 +32,7 @@ watch(themeType, () => {
 })
 
 async function signOut() {
-  const signOut = await userStore.signOut()
+  await userStore.signOut()
   window.location.reload()
 }
 

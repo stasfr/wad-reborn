@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useGrapeStore } from '@/stores/grapes'
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import GrapeCard from '@/components/Grapes/Card/GrapeCard.vue'
 import GrapeCardLoading from '@/components/Grapes/Card/Loading.vue'
 import GrapeSearch from '@/components/Grapes/GrapeSearch.vue'
 
-const userStore = useUserStore()
+const userStore = useUser()
 const grapesStore = useGrapeStore()
 const observer = ref(null) // Ссылка на элемент для наблюдения
 const observerInstance = ref(null) // Ссылка на экземпляр IntersectionObserver

@@ -2,13 +2,13 @@
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { API } from '@/services/controller'
-import { useUserStore } from '@/stores/user'
+import useUser from '@/composables/useUser'
 import { useGrapeStore } from '@/stores/grapes'
 import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
 import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
 
 const route = useRoute()
-const userStore = useUserStore()
+const userStore = useUser()
 const grapeStore = useGrapeStore()
 const grapeId = ref(route.params.grapeId)
 const grape = ref({})

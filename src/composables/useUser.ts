@@ -1,20 +1,17 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { API } from '@/services/controller'
+import { type signUpInput } from '@/types/user'
 
-export const useUserStore = defineStore('userStore', () => {
+export default function useUser() {
   const user = ref()
 
-  async function signUp({ email, password }) {
-    const { data, error } = await API.Auth.signUp({ email, password })
+  async function signUp(signUpPayload: signUpInput) {
+    const { error } = await API.Auth.signUp(signUpPayload)
     if (error) return
   }
 
-  async function signInWithPassword({ email, password }) {
-    const { data, error } = await API.Auth.signInWithPassword({
-      email,
-      password,
-    })
+  async function signInWithPassword(signUpPayload: signUpInput) {
+    const { error } = await API.Auth.signInWithPassword(signUpPayload)
     if (error) return
   }
 
@@ -69,4 +66,4 @@ export const useUserStore = defineStore('userStore', () => {
     getUserId,
     getUser,
   }
-})
+}
