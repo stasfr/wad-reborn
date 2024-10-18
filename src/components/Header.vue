@@ -5,21 +5,22 @@ import Menubar from "primevue/menubar";
 import ToggleSwitch from "primevue/toggleswitch";
 import Avatar from "primevue/avatar";
 import useTheme from "@/composables/useTheme";
-import Popover from "primevue/popover";
-import Button from "primevue/button";
 import Menu from "primevue/menu";
+import { Icon } from "@iconify/vue";
+import { useRouter } from "vue-router";
 
 const user = ref({});
 const userStore = useUserStore();
 const useThemeStore = useTheme();
+const router = useRouter();
 
 const themeType = ref<boolean>(
   useThemeStore.getTheme.value === "dark" ? true : false
 );
 
-const popover = ref();
-function togglePopover(event: any) {
-  popover.value.toggle(event);
+const menu = ref();
+function toggleMenu(event: any) {
+  menu.value.toggle(event);
 }
 
 onMounted(async () => {
@@ -35,39 +36,52 @@ async function signOut() {
   window.location.reload();
 }
 
-const items = ref([
+// TODO: сделать кастомный RouterLink, чтобы to мог быть undefined
+const headerMenuItems = ref([
   {
     label: "Главная",
-    icon: "pi pi-home",
-    to: "/",
+    icon: "prime:home",
+    command: () => {
+      router.push("/");
+    },
   },
   {
-    label: "Виноград",
+    label: "Wine",
+    icon: "fluent-emoji-high-contrast:grapes",
     items: [
       {
         label: "Винограды",
-        icon: "pi pi-fw pi-table",
-        to: "/grapes",
+        icon: "fluent-emoji-high-contrast:grapes",
+        command: () => {
+          router.push("/grapes");
+        },
       },
       {
         label: "Конструктор",
-        icon: "pi pi-fw pi-table",
-        to: "/grapes/constructor",
+        icon: "tabler:hammer",
+        command: () => {
+          router.push("/grapes/constructor");
+        },
       },
       {
         label: "Заметки",
-        icon: "pi pi-fw pi-table",
-        to: "/grapes/notes",
+        icon: "iconoir:notes",
+        command: () => {
+          router.push("/grapes/notes");
+        },
       },
     ],
   },
   {
-    label: "Кубы",
+    label: "Dices",
+    icon: "iconoir:dice-six",
     items: [
       {
         label: "Кубы",
-        icon: "pi pi-fw pi-table",
-        to: "/dices",
+        icon: "iconoir:dice-six",
+        command: () => {
+          router.push("/dices");
+        },
       },
     ],
   },
@@ -75,88 +89,108 @@ const items = ref([
 
 const profileMenuItems = ref([
   {
-    label: "New",
-    icon: "pi pi-plus",
+    label: "Профиль",
+    items: [
+      {
+        label: "Аккаунт",
+        icon: "prime:user",
+        command: () => {
+          router.push("/profile");
+        },
+      },
+      {
+        label: "Выйти",
+        icon: "prime:sign-out",
+        command: () => {
+          signOut();
+        },
+      },
+    ],
   },
   {
-    label: "Search",
-    icon: "pi pi-search",
+    label: "Вход",
+    items: [
+      {
+        label: "Войти",
+        icon: "prime:sign-in",
+        command: () => {
+          router.push("/login");
+        },
+      },
+      {
+        label: "Регистрация",
+        icon: "prime:user-plus",
+        command: () => {
+          router.push("/register");
+        },
+      },
+    ],
   },
 ]);
 </script>
 
 <template>
   <header class="absolute w-full left-0 top-0 z-50">
-    <Menubar :model="items">
+    <Menubar :model="headerMenuItems">
       <template #start>
         <RouterLink to="/" class="font-bold mr-8">
-          <h1>WineAndDices</h1>
+          <h1 class="md:block hidden">WineAndDices</h1>
+          <h1 class="md:hidden">W&D</h1>
         </RouterLink>
       </template>
 
       <template #item="{ item, props, hasSubmenu, root }">
-        <RouterLink
-          v-ripple
-          class="flex items-center"
-          v-bind="props.action"
-          :to="item.to"
-        >
-          <span :class="item.icon" />
+        <a class="flex items-center" v-bind="props.action">
+          <Icon :icon="item.icon" class="size-5" />
+
           <span class="ml-2">{{ item.label }}</span>
-          <Badge
-            v-if="item.badge"
-            :class="{ 'ml-auto': !root, 'ml-2': root }"
-            :value="item.badge"
-            :severity="item.severity"
-          />
+
           <span
             v-if="item.shortcut"
             class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
-            >{{ item.shortcut }}</span
           >
-          <i
-            v-if="hasSubmenu"
-            :class="[
-              'pi pi-angle-down',
-              { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root },
-            ]"
-          ></i>
-        </RouterLink>
+            {{ item.shortcut }}
+          </span>
+
+          <span v-if="hasSubmenu">
+            <Icon v-if="root" icon="prime:angle-down" class="ml-2 size-6" />
+            <Icon v-else icon="prime:angle-right" class="ml-auto size-6" />
+          </span>
+        </a>
       </template>
 
       <template #end>
         <div class="flex gap-4">
-          <nav class="flex items-center gap-2">
-            <i class="pi pi-sun"></i>
+          <!-- TODO: сделать на маленьких экранах в profileMenu -->
+          <div class="xs:flex items-center gap-2 hidden">
+            <Icon class="size-6" icon="prime:sun" />
+
             <ToggleSwitch v-model="themeType" />
-            <i class="pi pi-moon"></i>
-          </nav>
+
+            <Icon class="size-6" icon="prime:moon" />
+          </div>
+
           <div>
             <Avatar
+              class="cursor-pointer"
               shape="circle"
               label="U"
               size="large"
-              @click="togglePopover"
+              @click="toggleMenu"
             />
 
-            <Popover ref="popover">
-              <Menu> </Menu>
-              <ul class="flex flex-col gap-4">
-                <Button v-if="!userStore.user">
-                  <RouterLink to="/login">Войти</RouterLink>
-                </Button>
+            <Menu ref="menu" :model="profileMenuItems" :popup="true">
+              <template #submenulabel="{ item }">
+                <span class="text-primary font-bold">{{ item.label }}</span>
+              </template>
 
-                <Button v-if="!userStore.user">
-                  <RouterLink to="/register">Регистрация</RouterLink>
-                </Button>
-
-                <Button v-if="userStore.user">
-                  <RouterLink to="/profile">Аккаунт</RouterLink>
-                </Button>
-
-                <Button v-if="userStore.user" @click="signOut"> Выйти </Button>
-              </ul>
-            </Popover>
+              <template #item="{ item, props }">
+                <a class="flex items-center" v-bind="props.action">
+                  <Icon :icon="item.icon" class="size-5" />
+                  <span>{{ item.label }}</span>
+                </a>
+              </template>
+            </Menu>
           </div>
         </div>
       </template>

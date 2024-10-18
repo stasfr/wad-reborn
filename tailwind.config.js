@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import daisyui from "daisyui";
 
 export default {
   darkMode: "class",
@@ -13,10 +12,5 @@ export default {
       xl: "1280px",
     },
     extend: {},
-  },
-  plugins: [daisyui],
-  daisyui: {
-    themes: true,
-    darkMode: "cupcake",
   },
 };
