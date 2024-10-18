@@ -1,7 +1,7 @@
 import { supabase } from '@/services/supabase'
 
 async function getAllGrapesCount() {
-  let query = supabase.from('Grape').select('*', { count: 'exact' })
+  const query = supabase.from('Grape').select('*', { count: 'exact' })
   return await query
 }
 
@@ -22,7 +22,7 @@ async function getGrapes(offset = 0, userId = null) {
   return await query
 }
 
-async function getGrapeById(id, userId = null) {
+async function getGrapeById(id: string, userId = null) {
   let query = supabase
     .from('Grape')
     .select(

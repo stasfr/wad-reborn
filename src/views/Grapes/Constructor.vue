@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useGrapeStore } from '@/stores/grapes'
+import useGrape from '@/composables/useGrape'
 import { onMounted } from 'vue'
 
-const grapeStore = useGrapeStore()
+const grapeStore = useGrape()
 
 onMounted(async () => {
   await grapeStore.getConstructor()

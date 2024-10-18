@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { useGrapeStore } from '@/stores/grapes'
+import useGrape from '@/composables/useGrape'
 import useUser from '@/composables/useUser'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import GrapeCard from '@/components/Grapes/Card/GrapeCard.vue'
 import GrapeCardLoading from '@/components/Grapes/Card/Loading.vue'
-import GrapeSearch from '@/components/Grapes/GrapeSearch.vue'
 
 const userStore = useUser()
-const grapesStore = useGrapeStore()
+const grapesStore = useGrape()
 const observer = ref(null) // Ссылка на элемент для наблюдения
 const observerInstance = ref(null) // Ссылка на экземпляр IntersectionObserver
 
@@ -57,7 +56,6 @@ function handleIntersect(entries) {
 
 <template>
   <section>
-    <GrapeSearch />
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <GrapeCardLoading v-if="grapesStore.loading" />
       <GrapeCard v-else v-for="grape in grapesStore.grapes" :grape="grape" />

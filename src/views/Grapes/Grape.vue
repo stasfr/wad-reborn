@@ -3,13 +3,11 @@ import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { API } from '@/services/controller'
 import useUser from '@/composables/useUser'
-import { useGrapeStore } from '@/stores/grapes'
-import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
-import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
+import useGrape from '@/composables/useGrape'
 
 const route = useRoute()
 const userStore = useUser()
-const grapeStore = useGrapeStore()
+const grapeStore = useGrape()
 const grapeId = ref(route.params.grapeId)
 const grape = ref({})
 const loading = ref(false)
@@ -44,18 +42,7 @@ onMounted(async () => {
       </span>
     </div>
     <!-- btns -->
-    <div class="flex flex-col items-start gap-2">
-      <ToggleFavoriteButton
-        :grapeId="grape.id"
-        :favorite="grape.Favorite"
-        :isFullWidth="true"
-      />
-      <ToggleConstructorButton
-        :grapeId="grape.id"
-        :grapeConstructor="grape.GrapeConstructor"
-        :isFullWidth="true"
-      />
-    </div>
+    <div class="flex flex-col items-start gap-2"></div>
     <!-- taste profile -->
     <div class="flex flex-col">
       <div v-for="(value, key) in grape.taste_profile" class="flex flex-col">

@@ -1,13 +1,14 @@
 import { supabase } from '@/services/supabase'
+import { type signUpInput } from '@/types/user'
 
-async function signUp({ email, password }) {
+async function signUp({ email, password }: signUpInput) {
   return await supabase.auth.signUp({
     email,
     password,
   })
 }
 
-async function signInWithPassword({ email, password }) {
+async function signInWithPassword({ email, password }: signUpInput) {
   return await supabase.auth.signInWithPassword({
     email,
     password,

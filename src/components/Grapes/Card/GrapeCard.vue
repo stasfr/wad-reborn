@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useGrapeStore } from '@/stores/grapes'
-import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
-import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
+import useGrape from '@/composables/useGrape'
 import BookIcon from '@/components/Icons/Outline/Book.vue'
 import BarsIcon from '@/components/Icons/Outline/Bars.vue'
 
-const grapeStore = useGrapeStore()
+const grapeStore = useGrape()
 
 const props = defineProps({
   grape: {
@@ -46,12 +44,6 @@ function addGrapeToNotes(grapeId, grapeName) {
       </div>
     </div>
     <div class="menu menu-horizontal justify-center join">
-      <ToggleFavoriteButton
-        :grapeId="props.grape.id"
-        :favorite="props.grape.Favorite"
-        class="join-item"
-      />
-
       <div class="tooltip" data-tip="Заметка">
         <RouterLink
           to="/grapes/new_note"
@@ -61,11 +53,6 @@ function addGrapeToNotes(grapeId, grapeName) {
           <BookIcon />
         </RouterLink>
       </div>
-
-      <ToggleConstructorButton
-        :grapeId="props.grape.id"
-        :grapeConstructor="props.grape.GrapeConstructor"
-      />
 
       <div class="tooltip" data-tip="Подробнее">
         <RouterLink
