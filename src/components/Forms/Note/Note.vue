@@ -1,21 +1,4 @@
-<template>
-  <form action="" class="space-y-2 last:text-center" @submit.prevent="">
-    <input
-      type="text"
-      placeholder="Заголовок"
-      class="input input-bordered w-full max-w-lg"
-      v-model="title"
-    />
-    <textarea
-      class="textarea textarea-bordered w-full max-w-lg h-48"
-      placeholder="Заметка"
-      v-model="text"
-    ></textarea>
-    <button class="btn" @click="saveGrapeNote">Сохранить</button>
-  </form>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useNoteStore } from '@/stores/note'
 import { useUserStore } from '@/stores/user'
@@ -48,3 +31,20 @@ async function saveGrapeNote() {
   console.log(data)
 }
 </script>
+
+<template>
+  <form action="" class="space-y-2 last:text-center" @submit.prevent="">
+    <input
+      type="text"
+      placeholder="Заголовок"
+      class="input input-bordered w-full max-w-lg"
+      v-model="title"
+    />
+    <textarea
+      class="textarea textarea-bordered w-full max-w-lg h-48"
+      placeholder="Заметка"
+      v-model="text"
+    ></textarea>
+    <button class="btn" @click="saveGrapeNote">Сохранить</button>
+  </form>
+</template>

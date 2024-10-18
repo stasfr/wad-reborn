@@ -4,7 +4,7 @@ import {
   createWebHistory,
   type NavigationGuardNext,
 } from 'vue-router'
-import Home from '@/views/Home.vue'
+import Home from '@/views/index.vue'
 import Dices from '@/views/Dices/Dices.vue'
 import Grapes from '@/views/Grapes/Grapes.vue'
 import Grape from '@/views/Grapes/Grape.vue'

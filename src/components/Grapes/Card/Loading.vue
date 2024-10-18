@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div v-for="item in 15">
     <div class="skeleton space-y-2 p-4 w-72 h-56 box-content">

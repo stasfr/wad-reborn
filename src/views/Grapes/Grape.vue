@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { API } from '@/services/controller'
+import { useUserStore } from '@/stores/user'
+import { useGrapeStore } from '@/stores/grapes'
+import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
+import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
+
+const route = useRoute()
+const userStore = useUserStore()
+const grapeStore = useGrapeStore()
+const grapeId = ref(route.params.grapeId)
+const grape = ref({})
+const loading = ref(false)
+
+onMounted(async () => {
+  try {
+    loading.value = true
+
+    const userId = await userStore.getUserId()
+    const data = await API.Grapes.getGrapeById(grapeId.value, userId)
+    if (data.error) throw Error(data.error)
+    grape.value = data.data[0]
+
+    loading.value = false
+  } catch (error) {
+    console.log(error)
+  }
+})
+</script>
+
 <template>
   <section class="space-y-8 flex flex-col" v-if="!loading">
     <!-- title (name) -->
@@ -63,35 +95,3 @@
     </div>
   </section>
 </template>
-
-<script setup>
-import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import { API } from '@/services/controller'
-import { useUserStore } from '@/stores/user'
-import { useGrapeStore } from '@/stores/grapes'
-import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
-import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
-
-const route = useRoute()
-const userStore = useUserStore()
-const grapeStore = useGrapeStore()
-const grapeId = ref(route.params.grapeId)
-const grape = ref({})
-const loading = ref(false)
-
-onMounted(async () => {
-  try {
-    loading.value = true
-
-    const userId = await userStore.getUserId()
-    const data = await API.Grapes.getGrapeById(grapeId.value, userId)
-    if (data.error) throw Error(data.error)
-    grape.value = data.data[0]
-
-    loading.value = false
-  } catch (error) {
-    console.log(error)
-  }
-})
-</script>

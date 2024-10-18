@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { useGrapeStore } from '@/stores/grapes'
+import { useNoteStore } from '@/stores/note'
+import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
+import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
+import BookIcon from '@/components/Icons/Outline/Book.vue'
+import BarsIcon from '@/components/Icons/Outline/Bars.vue'
+
+const grapeStore = useGrapeStore()
+const noteStore = useNoteStore()
+
+const props = defineProps({
+  grape: {
+    type: Object,
+    required: true,
+  },
+})
+
+function addGrapeToNotes(grapeId, grapeName) {
+  noteStore.addGrapeToNotes(grapeId, grapeName)
+}
+</script>
+
 <template>
   <div
     class="space-y-4 bg-primary text-primary-content card box-content p-4 w-64"
@@ -61,26 +84,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { useGrapeStore } from '@/stores/grapes'
-import { useNoteStore } from '@/stores/note'
-import ToggleFavoriteButton from '@/components/Grapes/UI/ToggleFavoriteButton.vue'
-import ToggleConstructorButton from '@/components/Grapes/UI/ToggleConstructorButton.vue'
-import BookIcon from '@/components/Icons/Outline/Book.vue'
-import BarsIcon from '@/components/Icons/Outline/Bars.vue'
-
-const grapeStore = useGrapeStore()
-const noteStore = useNoteStore()
-
-const props = defineProps({
-  grape: {
-    type: Object,
-    required: true,
-  },
-})
-
-function addGrapeToNotes(grapeId, grapeName) {
-  noteStore.addGrapeToNotes(grapeId, grapeName)
-}
-</script>

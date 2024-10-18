@@ -1,16 +1,4 @@
-<template>
-  <label class="input input-bordered flex items-center gap-2">
-    <input
-      :type="type"
-      class="grow"
-      :placeholder="placeholder"
-      v-model="model"
-    />
-    <component :is="icon"></component>
-  </label>
-</template>
-
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   type: {
     type: String,
@@ -25,3 +13,15 @@ const props = defineProps({
 
 const model = defineModel()
 </script>
+
+<template>
+  <label class="input input-bordered flex items-center gap-2">
+    <input
+      :type="type"
+      class="grow"
+      :placeholder="placeholder"
+      v-model="model"
+    />
+    <component :is="icon"></component>
+  </label>
+</template>

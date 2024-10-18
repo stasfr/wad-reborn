@@ -1,9 +1,3 @@
-<template>
-  <component :is="layout">
-    <RouterView />
-  </component>
-</template>
-
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import MainLayout from './layouts/MainLayout.vue'
@@ -16,8 +10,14 @@ const layouts = {
 }
 
 const layout = computed(() => {
-  const layoutKey = route.meta.layout
+  const layoutKey = route.meta.layout as keyof typeof layouts
 
   return layouts[layoutKey || 'MainLayout']
 })
 </script>
+
+<template>
+  <component :is="layout">
+    <RouterView />
+  </component>
+</template>

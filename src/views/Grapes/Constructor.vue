@@ -1,8 +1,4 @@
-<template>
-  <div>{{ grapeStore.constructor }}</div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { useGrapeStore } from '@/stores/grapes'
 import { onMounted } from 'vue'
 
@@ -12,3 +8,7 @@ onMounted(async () => {
   await grapeStore.getConstructor()
 })
 </script>
+
+<template>
+  <div>{{ grapeStore.constructor }}</div>
+</template>

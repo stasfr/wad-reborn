@@ -1,8 +1,4 @@
-<template>
-  <div>{{ userStore.user }}</div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 
@@ -12,3 +8,7 @@ onMounted(async () => {
   await userStore.getSession()
 })
 </script>
+
+<template>
+  <div>{{ userStore.user }}</div>
+</template>

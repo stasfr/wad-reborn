@@ -1,17 +1,4 @@
-<template>
-  <section>
-    <GrapeSearch />
-    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <GrapeCardLoading v-if="grapesStore.loading" />
-      <GrapeCard v-else v-for="grape in grapesStore.grapes" :grape="grape" />
-    </div>
-    <!-- Скрытый элемент для infinite scroll -->
-    <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
-    <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
-  </section>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { useGrapeStore } from '@/stores/grapes'
 import { useUserStore } from '@/stores/user'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
@@ -67,3 +54,16 @@ function handleIntersect(entries) {
   }
 }
 </script>
+
+<template>
+  <section>
+    <GrapeSearch />
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <GrapeCardLoading v-if="grapesStore.loading" />
+      <GrapeCard v-else v-for="grape in grapesStore.grapes" :grape="grape" />
+    </div>
+    <!-- Скрытый элемент для infinite scroll -->
+    <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
+    <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
+  </section>
+</template>

@@ -1,31 +1,4 @@
-<template>
-  <form class="flex flex-col space-y-4" @submit.prevent="">
-    <h2 class="text-center">Регистрация</h2>
-
-    <AuthInput
-      type="email"
-      placeholder="email"
-      v-model="email"
-      :icon="EmailIcon"
-    />
-    <AuthInput
-      type="password"
-      placeholder="пароль"
-      v-model="password"
-      :icon="PasswordIcon"
-    />
-    <AuthInput
-      type="password"
-      placeholder="пароль повторно"
-      v-model="passwordRepeat"
-      :icon="PasswordIcon"
-    />
-
-    <button class="btn" @click="signUp">Регистрация</button>
-  </form>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
@@ -53,3 +26,30 @@ async function signUp() {
   }
 }
 </script>
+
+<template>
+  <form class="flex flex-col space-y-4" @submit.prevent="">
+    <h2 class="text-center">Регистрация</h2>
+
+    <AuthInput
+      type="email"
+      placeholder="email"
+      v-model="email"
+      :icon="EmailIcon"
+    />
+    <AuthInput
+      type="password"
+      placeholder="пароль"
+      v-model="password"
+      :icon="PasswordIcon"
+    />
+    <AuthInput
+      type="password"
+      placeholder="пароль повторно"
+      v-model="passwordRepeat"
+      :icon="PasswordIcon"
+    />
+
+    <button class="btn" @click="signUp">Регистрация</button>
+  </form>
+</template>

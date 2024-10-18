@@ -1,20 +1,4 @@
-<template>
-  <div :class="{ tooltip: !isFullWidth }" :data-tip="getTooltipTitle()">
-    <label class="swap btn join-item">
-      <input
-        type="checkbox"
-        v-model="checkbox"
-        @click="toggleGrapeFavoriteStatus"
-        :disabled="isDisabled"
-      />
-      <StarOutline class="swap-off" />
-      <StarSolid class="swap-on" />
-      <span v-if="isFullWidth" class="ml-10">{{ getTooltipTitle() }}</span>
-    </label>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useGrapeStore } from '@/stores/grapes'
@@ -65,3 +49,19 @@ function getTooltipTitle() {
   return checkbox.value ? 'Удалить из избранного' : 'В избранное'
 }
 </script>
+
+<template>
+  <div :class="{ tooltip: !isFullWidth }" :data-tip="getTooltipTitle()">
+    <label class="swap btn join-item">
+      <input
+        type="checkbox"
+        v-model="checkbox"
+        @click="toggleGrapeFavoriteStatus"
+        :disabled="isDisabled"
+      />
+      <StarOutline class="swap-off" />
+      <StarSolid class="swap-on" />
+      <span v-if="isFullWidth" class="ml-10">{{ getTooltipTitle() }}</span>
+    </label>
+  </div>
+</template>
