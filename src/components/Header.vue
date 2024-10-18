@@ -41,9 +41,7 @@ const headerMenuItems = ref([
   {
     label: "Главная",
     icon: "prime:home",
-    command: () => {
-      router.push("/");
-    },
+    command: () => router.push("/"),
   },
   {
     label: "Wine",
@@ -52,23 +50,17 @@ const headerMenuItems = ref([
       {
         label: "Винограды",
         icon: "fluent-emoji-high-contrast:grapes",
-        command: () => {
-          router.push("/grapes");
-        },
+        command: () => router.push("/grapes"),
       },
       {
         label: "Конструктор",
         icon: "tabler:hammer",
-        command: () => {
-          router.push("/grapes/constructor");
-        },
+        command: () => router.push("/grapes/constructor"),
       },
       {
         label: "Заметки",
         icon: "iconoir:notes",
-        command: () => {
-          router.push("/grapes/notes");
-        },
+        command: () => router.push("/grapes/notes"),
       },
     ],
   },
@@ -79,9 +71,7 @@ const headerMenuItems = ref([
       {
         label: "Кубы",
         icon: "iconoir:dice-six",
-        command: () => {
-          router.push("/dices");
-        },
+        command: () => router.push("/dices"),
       },
     ],
   },
@@ -94,16 +84,12 @@ const profileMenuItems = ref([
       {
         label: "Аккаунт",
         icon: "prime:user",
-        command: () => {
-          router.push("/profile");
-        },
+        command: () => router.push("/profile"),
       },
       {
         label: "Выйти",
         icon: "prime:sign-out",
-        command: () => {
-          signOut();
-        },
+        command: () => signOut(),
       },
     ],
   },
@@ -113,16 +99,12 @@ const profileMenuItems = ref([
       {
         label: "Войти",
         icon: "prime:sign-in",
-        command: () => {
-          router.push("/login");
-        },
+        command: () => router.push("/login"),
       },
       {
         label: "Регистрация",
         icon: "prime:user-plus",
-        command: () => {
-          router.push("/register");
-        },
+        command: () => router.push("/register"),
       },
     ],
   },
