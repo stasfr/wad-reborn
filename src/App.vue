@@ -4,20 +4,20 @@
   </component>
 </template>
 
-<script setup>
-import { useRoute } from "vue-router";
-import MainLayout from "./layouts/MainLayout.vue";
-import { computed } from "vue";
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+import MainLayout from './layouts/MainLayout.vue'
+import { computed } from 'vue'
 
-const route = useRoute();
+const route = useRoute()
 
 const layouts = {
   MainLayout,
-};
+}
 
 const layout = computed(() => {
-  const layoutKey = route.meta.layout;
+  const layoutKey = route.meta.layout
 
-  return layouts[layoutKey || "MainLayout"];
-});
+  return layouts[layoutKey || 'MainLayout']
+})
 </script>
