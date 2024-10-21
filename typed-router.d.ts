@@ -19,13 +19,13 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
+    '/[...path]': RouteRecordInfo<'/[...path]', '/:path(.*)', { path: ParamValue<true> }, { path: ParamValue<false> }>,
     '/Dices/': RouteRecordInfo<'/Dices/', '/Dices', Record<never, never>, Record<never, never>>,
     '/Grapes/': RouteRecordInfo<'/Grapes/', '/Grapes', Record<never, never>, Record<never, never>>,
     '/Grapes/[grapeId]': RouteRecordInfo<'/Grapes/[grapeId]', '/Grapes/:grapeId', { grapeId: ParamValue<true> }, { grapeId: ParamValue<false> }>,
     '/Grapes/Constructor': RouteRecordInfo<'/Grapes/Constructor', '/Grapes/Constructor', Record<never, never>, Record<never, never>>,
     '/Grapes/Notes/': RouteRecordInfo<'/Grapes/Notes/', '/Grapes/Notes', Record<never, never>, Record<never, never>>,
     '/Grapes/Notes/[id]': RouteRecordInfo<'/Grapes/Notes/[id]', '/Grapes/Notes/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/NotFound': RouteRecordInfo<'/NotFound', '/NotFound', Record<never, never>, Record<never, never>>,
     '/User/Login': RouteRecordInfo<'/User/Login', '/User/Login', Record<never, never>, Record<never, never>>,
     '/User/Profile': RouteRecordInfo<'/User/Profile', '/User/Profile', Record<never, never>, Record<never, never>>,
     '/User/Register': RouteRecordInfo<'/User/Register', '/User/Register', Record<never, never>, Record<never, never>>,
