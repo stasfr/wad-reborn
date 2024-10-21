@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AuthInput: typeof import('./src/components/Forms/Auth/AuthInput.vue')['default']
+    Avatar: typeof import('primevue/avatar')['default']
     Bars: typeof import('./src/components/Icons/Outline/Bars.vue')['default']
     Book: typeof import('./src/components/Icons/Outline/Book.vue')['default']
     Bookmark: typeof import('./src/components/Icons/Outline/Bookmark.vue')['default']
@@ -19,6 +20,8 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header.vue')['default']
     Loading: typeof import('./src/components/Grapes/Card/Loading.vue')['default']
     Login: typeof import('./src/components/Forms/Auth/Login.vue')['default']
+    Menu: typeof import('primevue/menu')['default']
+    Menubar: typeof import('primevue/menubar')['default']
     Note: typeof import('./src/components/Forms/Note/Note.vue')['default']
     Password: typeof import('./src/components/Icons/Password.vue')['default']
     Register: typeof import('./src/components/Forms/Auth/Register.vue')['default']
@@ -29,5 +32,6 @@ declare module 'vue' {
     Swatch: typeof import('./src/components/Icons/Outline/Swatch.vue')['default']
     ToggleConstructorButton: typeof import('./src/components/Grapes/UI/ToggleConstructorButton.vue')['default']
     ToggleFavoriteButton: typeof import('./src/components/Grapes/UI/ToggleFavoriteButton.vue')['default']
+    ToggleSwitch: typeof import('primevue/toggleswitch')['default']
   }
 }

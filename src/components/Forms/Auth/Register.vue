@@ -2,9 +2,6 @@
 import { ref } from 'vue'
 import useUser from '@/composables/useUser'
 import { useRouter } from 'vue-router'
-import EmailIcon from '@/components/Icons/Email.vue'
-import PasswordIcon from '@/components/Icons/Password.vue'
-import AuthInput from '@/components/Forms/Auth/AuthInput.vue'
 
 const email = ref('stas240600@yandex.ru')
 const password = ref('password')
@@ -35,19 +32,19 @@ async function signUp() {
       type="email"
       placeholder="email"
       v-model="email"
-      :icon="EmailIcon"
+      icon="prime:user"
     />
     <AuthInput
       type="password"
       placeholder="пароль"
       v-model="password"
-      :icon="PasswordIcon"
+      icon="prime:key"
     />
     <AuthInput
       type="password"
       placeholder="пароль повторно"
       v-model="passwordRepeat"
-      :icon="PasswordIcon"
+      icon="prime:key"
     />
 
     <button class="btn" @click="signUp">Регистрация</button>

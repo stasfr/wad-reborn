@@ -1,15 +1,13 @@
 <script setup lang="ts">
-const props = defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: true,
-  },
-  icon: { type: Object },
-})
+import { Icon } from '@iconify/vue'
+
+interface Props {
+  type: string
+  placeholder: string
+  icon: string
+}
+
+const props = defineProps<Props>()
 
 const model = defineModel()
 </script>
@@ -17,11 +15,11 @@ const model = defineModel()
 <template>
   <label class="input input-bordered flex items-center gap-2">
     <input
-      :type="type"
+      :type="props.type"
       class="grow"
-      :placeholder="placeholder"
+      :placeholder="props.placeholder"
       v-model="model"
     />
-    <component :is="icon"></component>
+    <Icon class="size-6" :icon="props.icon" />
   </label>
 </template>

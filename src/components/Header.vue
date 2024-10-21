@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import useUser from '@/composables/useUser'
-import { onMounted, ref, watch } from 'vue'
-import Menubar from 'primevue/menubar'
-import ToggleSwitch from 'primevue/toggleswitch'
-import Avatar from 'primevue/avatar'
 import useTheme from '@/composables/useTheme'
-import Menu from 'primevue/menu'
+import { onMounted, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 
@@ -84,7 +80,7 @@ const profileMenuItems = ref([
       {
         label: 'Аккаунт',
         icon: 'prime:user',
-        command: () => router.push('/profile'),
+        command: () => router.push('/user/profile'),
       },
       {
         label: 'Выйти',
@@ -99,12 +95,12 @@ const profileMenuItems = ref([
       {
         label: 'Войти',
         icon: 'prime:sign-in',
-        command: () => router.push('/login'),
+        command: () => router.push('/user/login'),
       },
       {
         label: 'Регистрация',
         icon: 'prime:user-plus',
-        command: () => router.push('/register'),
+        command: () => router.push('/user/register'),
       },
     ],
   },
