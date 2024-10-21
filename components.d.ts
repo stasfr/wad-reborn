@@ -14,6 +14,7 @@ declare module 'vue' {
     Email: typeof import('./src/components/Icons/Email.vue')['default']
     Funnel: typeof import('./src/components/Icons/Outline/Funnel.vue')['default']
     GrapeCard: typeof import('./src/components/Grapes/Card/GrapeCard.vue')['default']
+    GrapeCardLoading: typeof import('./src/components/Grapes/Card/GrapeCardLoading.vue')['default']
     GrapeSearch: typeof import('./src/components/Grapes/GrapeSearch.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Loading: typeof import('./src/components/Grapes/Card/Loading.vue')['default']

@@ -2,8 +2,6 @@
 import useGrape from '@/composables/useGrape'
 import useUser from '@/composables/useUser'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import GrapeCard from '@/components/Grapes/Card/GrapeCard.vue'
-import GrapeCardLoading from '@/components/Grapes/Card/Loading.vue'
 
 const userStore = useUser()
 const grapesStore = useGrape()
@@ -11,12 +9,13 @@ const observer = ref(null) // Ссылка на элемент для наблю
 const observerInstance = ref(null) // Ссылка на экземпляр IntersectionObserver
 
 onMounted(async () => {
-  if (grapesStore.grapes.length === 0) {
+  if (grapesStore.grapes.value.length === 0) {
     const userSession = await userStore.getSession()
+
     let userId = null
 
     if (userSession) {
-      userId = userStore.user.id
+      userId = userStore.user.value.id
     }
 
     await grapesStore.getGrapes(userId)
@@ -57,16 +56,16 @@ function handleIntersect(entries) {
 <template>
   <section>
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <GrapeCardLoading v-if="grapesStore.loading" />
+      <GrapeCardLoading v-if="grapesStore.loading.value" />
       <GrapeCard
         v-else
-        v-for="grape in grapesStore.grapes"
+        v-for="grape in grapesStore.grapes.value"
         :grape="grape"
         :key="grape.id"
       />
     </div>
     <!-- Скрытый элемент для infinite scroll -->
-    <!-- TODO: сделать спиннер при загрузке, иначе бзеру неочевидно, что что-то грузится -->
+    <!-- TODO: сделать спиннер при загрузке, иначе юзеру неочевидно, что что-то грузится -->
     <div v-if="!grapesStore.isAllGrapesLoaded" ref="observer"></div>
   </section>
 </template>
