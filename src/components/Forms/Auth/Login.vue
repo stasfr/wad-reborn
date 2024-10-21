@@ -1,35 +1,72 @@
 <script setup lang="ts">
-const email = ref('stas240600@yandex.ru')
-const password = ref('password')
+import { Icon } from '@iconify/vue'
+
+const loginData = ref({
+  email: 'stas240600@yandex.ru',
+  password: 'password',
+})
 
 const userStore = useUser()
 
 async function signInWithPassword() {
+  // TODO: более комплексная валидация
+  // TODO: блок try catch
   await userStore.signInWithPassword({
-    email: email.value,
-    password: password.value,
+    email: loginData.value.email,
+    password: loginData.value.password,
   })
   window.location.reload()
+}
+
+function resetForm() {
+  loginData.value = {
+    email: '',
+    password: '',
+  }
 }
 </script>
 
 <template>
-  <form class="flex flex-col space-y-4" @submit.prevent="">
-    <h2 class="text-center">Вход</h2>
+  <Card>
+    <template #title>
+      <div class="flex justify-between mb-4 items-center">
+        <h2>Вход</h2>
+        <Button @click="resetForm" severity="secondary" link>
+          <template #icon>
+            <Icon class="size-5" icon="ri:reset-left-line" />
+          </template>
+        </Button>
+      </div>
+    </template>
 
-    <AuthInput
-      type="email"
-      placeholder="email"
-      v-model="email"
-      icon="prime:user"
-    />
-    <AuthInput
-      type="password"
-      placeholder="пароль"
-      v-model="password"
-      icon="prime:key"
-    />
+    <template #content>
+      <div class="flex flex-col gap-4 mb-4">
+        <FloatLabel variant="on">
+          <InputText
+            id="email"
+            type="text"
+            v-model="loginData.email"
+            class="w-full"
+          />
+          <label for="email">Email</label>
+        </FloatLabel>
 
-    <button class="btn" @click="signInWithPassword">Войти</button>
-  </form>
+        <FloatLabel variant="on">
+          <Password
+            v-model="loginData.password"
+            inputId="password"
+            :feedback="false"
+            toggleMask
+          />
+          <label for="password">Пароль</label>
+        </FloatLabel>
+      </div>
+    </template>
+
+    <template #footer>
+      <div class="flex justify-end">
+        <Button label="Войти" @click="signInWithPassword" />
+      </div>
+    </template>
+  </Card>
 </template>

@@ -83,7 +83,7 @@ function resetForm() {
 
     <template #footer>
       <div class="flex justify-end">
-        <Button class="" label="Регистрация" @click="signUp" />
+        <Button label="Регистрация" @click="signUp" />
       </div>
     </template>
   </Card>
