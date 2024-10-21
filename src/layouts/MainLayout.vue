@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
-import useTheme from '@/composables/useTheme'
-
 const useThemeStore = useTheme()
 </script>
 

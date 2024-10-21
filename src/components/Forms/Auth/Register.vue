@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import useUser from '@/composables/useUser'
-import { useRouter } from 'vue-router'
-
 const email = ref('stas240600@yandex.ru')
 const password = ref('password')
 const passwordRepeat = ref('passwordd')

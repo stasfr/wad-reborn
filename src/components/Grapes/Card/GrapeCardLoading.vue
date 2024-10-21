@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const items = ref<Array<{ id: number }>>(
   Array.from({ length: 15 }, (_, i) => ({ id: i + 1 })),
 )

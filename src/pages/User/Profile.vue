@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import useUser from '@/composables/useUser'
-import { onMounted } from 'vue'
-
 const userStore = useUser()
 
 onMounted(async () => {

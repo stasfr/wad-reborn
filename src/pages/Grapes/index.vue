@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import useGrape from '@/composables/useGrape'
-import useUser from '@/composables/useUser'
-import { onMounted, onBeforeUnmount, ref } from 'vue'
-
 const userStore = useUser()
 const grapesStore = useGrape()
 const observer = ref(null) // Ссылка на элемент для наблюдения

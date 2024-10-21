@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import useUser from '@/composables/useUser'
-
 const email = ref('stas240600@yandex.ru')
 const password = ref('password')
 

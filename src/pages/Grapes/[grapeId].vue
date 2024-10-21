@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
 import { API } from '@/services/controller'
-import useUser from '@/composables/useUser'
-import useGrape from '@/composables/useGrape'
 
 const route = useRoute()
 const userStore = useUser()

@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import useUser from '@/composables/useUser'
-import useTheme from '@/composables/useTheme'
-import { onMounted, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
-import { useRouter } from 'vue-router'
 
 const user = ref({})
 const userStore = useUser()
