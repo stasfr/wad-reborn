@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-const user = ref({})
-const userStore = useUser()
 const useThemeStore = useTheme()
 const router = useRouter()
 
-const { signOut } = useAuth()
+const { user, signOut, getSession } = useAuth()
 
 const themeType = ref<boolean>(
   useThemeStore.getTheme.value === 'dark' ? true : false,
@@ -18,7 +16,7 @@ function toggleMenu(event: Event) {
 }
 
 onMounted(async () => {
-  user.value = await userStore.getUser()
+  await getSession()
 
   if (!user.value) {
     profileMenuItems.value = [

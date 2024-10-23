@@ -7,6 +7,7 @@ const loginData = ref({
 })
 
 const { signInWithPassword } = useAuth()
+const router = useRouter()
 
 async function login() {
   // TODO: более комплексная валидация
@@ -15,7 +16,7 @@ async function login() {
     email: loginData.value.email,
     password: loginData.value.password,
   })
-  window.location.reload()
+  router.push({ path: '/user/profile' })
 }
 
 function resetForm() {

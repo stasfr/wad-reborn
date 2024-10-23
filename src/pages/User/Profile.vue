@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { user } = useUser()
-const { getSession } = useAuth()
+const { user, getSession } = useAuth()
 
 onMounted(async () => {
   await getSession()
