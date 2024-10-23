@@ -17,6 +17,44 @@ function toggleMenu(event: Event) {
 
 onMounted(async () => {
   user.value = await userStore.getUser()
+
+  if (!user.value) {
+    profileMenuItems.value = [
+      {
+        label: 'Вход',
+        items: [
+          {
+            label: 'Войти',
+            icon: 'prime:sign-in',
+            command: () => router.push('/user/login'),
+          },
+          {
+            label: 'Регистрация',
+            icon: 'prime:user-plus',
+            command: () => router.push('/user/register'),
+          },
+        ],
+      },
+    ]
+  } else {
+    profileMenuItems.value = [
+      {
+        label: 'Профиль',
+        items: [
+          {
+            label: 'Аккаунт',
+            icon: 'prime:user',
+            command: () => router.push('/user/profile'),
+          },
+          {
+            label: 'Выйти',
+            icon: 'prime:sign-out',
+            command: () => signOut(),
+          },
+        ],
+      },
+    ]
+  }
 })
 
 watch(themeType, () => {
@@ -69,38 +107,7 @@ const headerMenuItems = ref([
   },
 ])
 
-const profileMenuItems = ref([
-  {
-    label: 'Профиль',
-    items: [
-      {
-        label: 'Аккаунт',
-        icon: 'prime:user',
-        command: () => router.push('/user/profile'),
-      },
-      {
-        label: 'Выйти',
-        icon: 'prime:sign-out',
-        command: () => signOut(),
-      },
-    ],
-  },
-  {
-    label: 'Вход',
-    items: [
-      {
-        label: 'Войти',
-        icon: 'prime:sign-in',
-        command: () => router.push('/user/login'),
-      },
-      {
-        label: 'Регистрация',
-        icon: 'prime:user-plus',
-        command: () => router.push('/user/register'),
-      },
-    ],
-  },
-])
+const profileMenuItems = ref()
 </script>
 
 <template>
