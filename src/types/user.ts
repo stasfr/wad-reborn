@@ -7,7 +7,7 @@ export interface User {
   updatedAt: string
 }
 
-export interface signUpInput {
+export interface ILoginRequestData {
   email: string
   password: string
 }

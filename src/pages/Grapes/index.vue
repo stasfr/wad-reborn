@@ -4,14 +4,17 @@ const grapesStore = useGrape()
 const observer = ref(null) // Ссылка на элемент для наблюдения
 const observerInstance = ref(null) // Ссылка на экземпляр IntersectionObserver
 
+const { getSession } = useAuth()
+
 onMounted(async () => {
   if (grapesStore.grapes.value.length === 0) {
-    const userSession = await userStore.getSession()
+    const userSession = await getSession()
 
-    let userId = null
+    const userId = null
 
+    // TODO: изменить логику, после рефакторинга useUser
     if (userSession) {
-      userId = userStore.user.value.id
+      // userId = userStore.user.value.id
     }
 
     await grapesStore.getGrapes(userId)

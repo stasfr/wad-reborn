@@ -6,12 +6,12 @@ const loginData = ref({
   password: 'password',
 })
 
-const userStore = useUser()
+const { signInWithPassword } = useAuth()
 
-async function signInWithPassword() {
+async function login() {
   // TODO: более комплексная валидация
   // TODO: блок try catch
-  await userStore.signInWithPassword({
+  await signInWithPassword({
     email: loginData.value.email,
     password: loginData.value.password,
   })
@@ -65,7 +65,7 @@ function resetForm() {
 
     <template #footer>
       <div class="flex justify-end">
-        <Button label="Войти" @click="signInWithPassword" />
+        <Button label="Войти" @click="login" />
       </div>
     </template>
   </Card>

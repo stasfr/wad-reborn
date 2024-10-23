@@ -1,14 +1,14 @@
 import { supabase } from '@/services/supabase'
-import { type signUpInput } from '@/types/user'
+import { type ILoginRequestData } from '@/types/user'
 
-async function signUp({ email, password }: signUpInput) {
+async function signUp({ email, password }: ILoginRequestData) {
   return await supabase.auth.signUp({
     email,
     password,
   })
 }
 
-async function signInWithPassword({ email, password }: signUpInput) {
+async function signInWithPassword({ email, password }: ILoginRequestData) {
   return await supabase.auth.signInWithPassword({
     email,
     password,

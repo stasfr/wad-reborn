@@ -1,11 +1,13 @@
 <script setup lang="ts">
-const userStore = useUser()
+const { user } = useUser()
+const { getSession } = useAuth()
 
 onMounted(async () => {
-  await userStore.getSession()
+  await getSession()
 })
 </script>
 
 <template>
-  <div>{{ userStore.user }}</div>
+  <!-- TODO: изменить логику, после рефакторинга useUser -->
+  <div>{{ user }}</div>
 </template>

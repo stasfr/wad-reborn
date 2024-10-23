@@ -8,13 +8,12 @@ const registerData = ref({
 })
 
 const router = useRouter()
+const { signUp } = useAuth()
 
-const userStore = useUser()
-
-async function signUp() {
+async function register() {
   // TODO: более комплексная валидация
   if (registerData.value.password === registerData.value.passwordRepeat) {
-    await userStore.signUp({
+    await signUp({
       email: registerData.value.email,
       password: registerData.value.password,
     })
@@ -83,7 +82,7 @@ function resetForm() {
 
     <template #footer>
       <div class="flex justify-end">
-        <Button label="Регистрация" @click="signUp" />
+        <Button label="Регистрация" @click="register" />
       </div>
     </template>
   </Card>

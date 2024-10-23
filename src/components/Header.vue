@@ -6,6 +6,8 @@ const userStore = useUser()
 const useThemeStore = useTheme()
 const router = useRouter()
 
+const { signOut } = useAuth()
+
 const themeType = ref<boolean>(
   useThemeStore.getTheme.value === 'dark' ? true : false,
 )
@@ -49,7 +51,7 @@ onMounted(async () => {
           {
             label: 'Выйти',
             icon: 'prime:sign-out',
-            command: () => signOut(),
+            command: () => logout(),
           },
         ],
       },
@@ -61,8 +63,8 @@ watch(themeType, () => {
   useThemeStore.changeTheme()
 })
 
-async function signOut() {
-  await userStore.signOut()
+async function logout() {
+  await signOut()
   window.location.reload()
 }
 

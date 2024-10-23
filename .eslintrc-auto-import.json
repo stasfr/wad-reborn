@@ -298,6 +298,7 @@
     "whenever": true,
     "useGrape": true,
     "useTheme": true,
-    "useUser": true
+    "useUser": true,
+    "useAuth": true
   }
 }
